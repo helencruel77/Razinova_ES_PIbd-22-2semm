@@ -117,6 +117,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LawFirmFileImplement\LawFirmFileImplement.csproj">
+      <Project>{9B84FD48-16C2-4781-8F05-14EE1B41912C}</Project>
+      <Name>LawFirmFileImplement</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LawFirmListImplement\LawFirmListImplement.csproj">
       <Project>{B617D3E5-A4C5-4D83-93A8-D94738611029}</Project>
       <Name>LawFirmListImplement</Name>
