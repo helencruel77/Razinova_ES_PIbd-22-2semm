@@ -82,28 +82,5 @@ namespace LawFirmFileImplement.Implements
             name = product != null ? product.ProductName : "";
             return name;
         }
-
-        private OrderViewModel CreateViewModel(Order order)
-        {
-            string ProductName = "";
-            for (int j = 0; j < source.Products.Count; ++j)
-            {
-                if (source.Products[j].Id == order.ProductId)
-                {
-                    ProductName = source.Products[j].ProductName;
-                    break;
-                }
-            }
-            return new OrderViewModel
-            {
-                Id = order.Id,
-                ProductName = ProductName,
-                Count = order.Count,
-                Sum = order.Sum,
-                Status = order.Status,
-                DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement
-            };
-        }
     }
 }
