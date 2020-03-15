@@ -1,0 +1,18 @@
+﻿using LawFirmBusinessLogics.BindingModels;
+using LawFirmBusinessLogics.ViewModels;
+using LawFirmLogic.BindingModels;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace LawFirmBusinessLogics.Interfaces
+{
+    public interface ISkladLogic
+    {
+        List<SkladViewModel> GetList();
+        SkladViewModel GetElement(int id);
+        void CreateOrUpdate(SkladBindingModel model);
+        void Delete(SkladBindingModel model);
+        void FillUpSklad(SkladBlankBindingModel model);
+    }
+}

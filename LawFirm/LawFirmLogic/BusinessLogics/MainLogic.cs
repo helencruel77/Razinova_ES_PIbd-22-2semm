@@ -1,6 +1,7 @@
 ﻿using LawFirmBusinessLogics.BindingModels;
 using LawFirmBusinessLogics.Enums;
 using LawFirmBusinessLogics.Interfaces;
+using LawFirmLogic.BindingModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,9 +12,11 @@ namespace LawFirmBusinessLogics.BusinessLogics
     {
 
         private readonly IOrderLogic orderLogic;
-        public MainLogic(IOrderLogic orderLogic)
+        private readonly ISkladLogic skladLogic;
+        public MainLogic(IOrderLogic orderLogic, ISkladLogic skladLogic)
         {
             this.orderLogic = orderLogic;
+            this.skladLogic = skladLogic;
         }
         public void CreateOrder(CreateOrderBindingModel model)
         {
@@ -25,6 +28,11 @@ namespace LawFirmBusinessLogics.BusinessLogics
                 DateCreate = DateTime.Now,
                 Status = OrderStatus.Принят
             });
+        }
+
+        public void FillUpSklad (SkladBlankBindingModel model)
+        {
+            skladLogic.FillUpSklad(model);
         }
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
