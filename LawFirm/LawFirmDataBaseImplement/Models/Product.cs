@@ -14,7 +14,7 @@ namespace LawFirmFileImplement.Models
         [Required]
         public decimal Price { get; set; }
         [ForeignKey("BlankId")]
-        public virtual Blank Blank { get; set; }
+        public virtual List<ProductBlank> ProductBlanks { get; set; }
         public virtual List<Order> Orders { get; set; }
     }
 }
