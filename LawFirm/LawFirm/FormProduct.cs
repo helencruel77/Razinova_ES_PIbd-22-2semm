@@ -35,9 +35,8 @@ namespace LawFirmView
                 {
                     ProductViewModel view = logic.Read(new ProductBindingModel
                     {
-                        Id = id.Value
-                    })?[0];
-                    if (view != null)
+                        Id = id.Value })?[0];
+                    if (view == null)
                     {
                         textBoxName.Text = view.ProductName;
                         textBoxPrice.Text = view.Price.ToString();
@@ -62,13 +61,14 @@ namespace LawFirmView
             {
                 if (productBlanks != null)
                 {
-                    dataGridView.Rows.Clear();
+                    dataGridView1.Rows.Clear();
                     foreach (var pc in productBlanks)
                     {
-                        dataGridView.Rows.Add(new object[] { pc.Key, pc.Value.Item1,
-pc.Value.Item2 });
+                        dataGridView1.Rows.Add(new object[] { pc.Key, pc.Value.Item1,
+                        pc.Value.Item2 });
                     }
                 }
+                
             }
             catch (Exception ex)
             {
@@ -95,10 +95,10 @@ MessageBoxIcon.Error);
         }
         private void ButtonUpd_Click(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == 1)
+            if (dataGridView1.SelectedRows.Count == 1)
             {
                 var form = Container.Resolve<FormProductBlank>();
-                int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
                 form.Id = id;
                 form.Count = productBlanks[id].Item2;
                 if (form.ShowDialog() == DialogResult.OK)
@@ -111,7 +111,7 @@ MessageBoxIcon.Error);
         }
         private void ButtonDel_Click(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == 1)
+            if (dataGridView1.SelectedRows.Count == 1)
             {
                 if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo,
                MessageBoxIcon.Question) == DialogResult.Yes)
@@ -119,7 +119,7 @@ MessageBoxIcon.Error);
                     try
                     {
 
-                        productBlanks.Remove(Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value));
+                        productBlanks.Remove(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value));
                     }
                     catch (Exception ex)
                     {

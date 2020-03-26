@@ -1,4 +1,5 @@
-﻿using LawFirmBusinessLogics.BindingModels;
+﻿using LawFirm;
+using LawFirmBusinessLogics.BindingModels;
 using LawFirmBusinessLogics.BusinessLogics;
 using LawFirmBusinessLogics.Interfaces;
 using System;
@@ -119,7 +120,7 @@ namespace LawFirmView
 
         private void пакетыДокументовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormProduct>();
+            var form = Container.Resolve<FormProducts>();
             form.ShowDialog();
         }
     }

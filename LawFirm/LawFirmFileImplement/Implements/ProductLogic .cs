@@ -18,83 +18,139 @@ namespace LawFirmFileImplement.Implements
         }
         public void CreateOrUpdate(ProductBindingModel model)
         {
-            Product element = source.Products.FirstOrDefault(rec => rec.ProductName ==
-           model.ProductName && rec.Id != model.Id);
-            if (element != null)
+            Product temp = model.Id.HasValue ? null : new Product { Id = 1 };
+            foreach (var product in source.Products)
             {
-                throw new Exception("Уже есть пакет документов с таким названием");
+                if (product.ProductName == model.ProductName && product.Id != model.Id)
+                {
+                    throw new Exception("Уже есть изделие с таким названием");
+                }
+                if (!model.Id.HasValue && product.Id >= temp.Id)
+                {
+                    temp.Id = product.Id + 1;
+                }
+                else if (model.Id.HasValue && product.Id == model.Id)
+                {
+                    temp = product;
+                }
             }
             if (model.Id.HasValue)
             {
-                element = source.Products.FirstOrDefault(rec => rec.Id == model.Id);
-                if (element == null)
+                if (temp == null)
                 {
                     throw new Exception("Элемент не найден");
                 }
+                CreateModel(model, temp);
             }
             else
             {
-                int maxId = source.Products.Count > 0 ? source.Blanks.Max(rec =>
-               rec.Id) : 0;
-                element = new Product { Id = maxId + 1 };
-                source.Products.Add(element);
+                source.Products.Add(CreateModel(model, temp));
             }
-            element.ProductName = model.ProductName;
-            element.Price = model.Price;
+        }
 
-            source.ProductBlanks.RemoveAll(rec => rec.ProductId == model.Id &&
-           !model.ProductBlanks.ContainsKey(rec.BlankId));
-
-            var updateBlanks = source.ProductBlanks.Where(rec => rec.ProductId ==
-           model.Id && model.ProductBlanks.ContainsKey(rec.BlankId));
-            foreach (var updateBlank in updateBlanks)
+        private Product CreateModel(ProductBindingModel model, Product temp)
+        {
+            temp.ProductName = model.ProductName;
+            temp.Price = model.Price;
+            int maxSFId = 0;
+            for (int i = 0; i < source.ProductBlanks.Count; ++i)
             {
-                updateBlank.Count =
-               model.ProductBlanks[updateBlank.BlankId].Item2;
-                model.ProductBlanks.Remove(updateBlank.BlankId);
+                if (source.ProductBlanks[i].Id > maxSFId)
+                {
+                    maxSFId = source.ProductBlanks[i].Id;
+                }
+                if (source.ProductBlanks[i].ProductId == temp.Id)
+                {
+                    if
+                    (model.ProductBlanks.ContainsKey(source.ProductBlanks[i].BlankId))
+                    {
+                        source.ProductBlanks[i].Count =
+                        model.ProductBlanks[source.ProductBlanks[i].BlankId].Item2;
+                        model.ProductBlanks.Remove(source.ProductBlanks[i].BlankId);
+                    }
+                    else
+                    {
+                        source.ProductBlanks.RemoveAt(i--);
+                    }
+                }
             }
-            int maxPCId = source.ProductBlanks.Count > 0 ?
-           source.ProductBlanks.Max(rec => rec.Id) : 0;
-            foreach (var pc in model.ProductBlanks)
+            foreach (var sf in model.ProductBlanks)
             {
                 source.ProductBlanks.Add(new ProductBlank
                 {
-                    Id = ++maxPCId,
-                    ProductId = element.Id,
-                    BlankId = pc.Key,
-                    Count = pc.Value.Item2
+                    Id = ++maxSFId,
+                    ProductId = temp.Id,
+                    BlankId = sf.Key,
+                    Count = sf.Value.Item2
                 });
             }
+            return temp;
         }
+
         public void Delete(ProductBindingModel model)
         {
-            source.ProductBlanks.RemoveAll(rec => rec.ProductId == model.Id);
-            Product element = source.Products.FirstOrDefault(rec => rec.Id == model.Id);
-            if (element != null)
+            for (int i = 0; i < source.ProductBlanks.Count; ++i)
             {
-                source.Products.Remove(element);
+                if (source.ProductBlanks[i].ProductId == model.Id)
+                {
+                    source.ProductBlanks.RemoveAt(i--);
+                }
             }
-            else
+            for (int i = 0; i < source.Products.Count; ++i)
             {
-                throw new Exception("Элемент не найден");
+                if (source.Products[i].Id == model.Id)
+                {
+                    source.Products.RemoveAt(i);
+                    return;
+                }
             }
+            throw new Exception("Элемент не найден");
         }
         public List<ProductViewModel> Read(ProductBindingModel model)
         {
-            return source.Products
-            .Where(rec => model == null || rec.Id == model.Id)
-            .Select(rec => new ProductViewModel
+            List<ProductViewModel> result = new List<ProductViewModel>();
+            foreach (var product in source.Products)
             {
-                Id = rec.Id,
-                ProductName = rec.ProductName,
-                Price = rec.Price,
-                ProductBlanks = source.ProductBlanks
-            .Where(recPC => recPC.ProductId == rec.Id)
-           .ToDictionary(recPC => recPC.BlankId, recPC =>
-            (source.Blanks.FirstOrDefault(recC => recC.Id ==
-           recPC.BlankId)?.BlankName, recPC.Count))
-            })
-            .ToList();
+                if (model != null)
+                {
+                    if (product.Id == model.Id)
+                    {
+                        result.Add(CreateViewModel(product));
+                        break;
+                    }
+                    continue;
+                }
+                result.Add(CreateViewModel(product));
+            }
+            return result;
+        }
+
+        private ProductViewModel CreateViewModel(Product product)
+        {
+            Dictionary<int, (string, int)> ProductBlanks = new Dictionary<int, (string, int)>();
+            foreach (var sf in source.ProductBlanks)
+            {
+                if (sf.ProductId == product.Id)
+                {
+                    string BlankName = string.Empty;
+                    foreach (var Blank in source.Blanks)
+                    {
+                        if (sf.BlankId == Blank.Id)
+                        {
+                            BlankName = Blank.BlankName;
+                            break;
+                        }
+                    }
+                    ProductBlanks.Add(sf.BlankId, (BlankName, sf.Count));
+                }
+            }
+            return new ProductViewModel
+            {
+                Id = product.Id,
+                ProductName = product.ProductName,
+                Price = product.Price,
+                ProductBlanks = ProductBlanks
+            };
         }
     }
 }
