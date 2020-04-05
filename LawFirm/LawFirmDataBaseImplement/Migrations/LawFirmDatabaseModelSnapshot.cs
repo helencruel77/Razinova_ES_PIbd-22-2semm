@@ -60,6 +60,8 @@ namespace LawFirmDataBaseImplement.Migrations
                     b.Property<decimal>("Sum")
                         .HasColumnType("decimal(18,2)");
 
+                    b.HasIndex("ProductId");
+
                     b.HasKey("Id");
 
                     b.ToTable("Orders");
@@ -107,6 +109,15 @@ namespace LawFirmDataBaseImplement.Migrations
 
                     b.ToTable("ProductBlanks");
                 });
+
+            modelBuilder.Entity("LawFirmFileImplement.Models.Order", b =>
+            {
+                b.HasOne("LawFirmFileImplement.Models.Product", "Product")
+                    .WithMany("Orders")
+                    .HasForeignKey("ProductId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("LawFirmFileImplement.Models.ProductBlank", b =>
                 {

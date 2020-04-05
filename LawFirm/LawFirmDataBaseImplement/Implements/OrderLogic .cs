@@ -2,6 +2,7 @@
 using LawFirmBusinessLogics.Interfaces;
 using LawFirmBusinessLogics.ViewModels;
 using LawFirmFileImplement.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,11 +63,12 @@ namespace LawFirmDataBaseImplement.Implements
             using (var context = new LawFirmDatabase())
             {
                 return context.Orders
+            .Include(rec => rec.Product )
             .Where(rec => model == null || rec.Id == model.Id)
             .Select(rec => new OrderViewModel
             {
                 Id = rec.Id,
-                ProductName = context.Products.FirstOrDefault((r) => r.Id == rec.ProductId).ProductName,
+                ProductName = rec.Product.ProductName,
                 Count = rec.Count,
                 Sum = rec.Sum,
                 Status = rec.Status,
