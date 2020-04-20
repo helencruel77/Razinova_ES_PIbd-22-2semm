@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
+using LawFirm;
 
 namespace LawFirmView
 {
@@ -120,7 +121,7 @@ namespace LawFirmView
 
         private void пакетыДокументовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormProduct>();
+            var form = Container.Resolve<FormProducts>();
             form.ShowDialog();
         }
 

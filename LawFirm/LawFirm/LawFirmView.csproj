@@ -97,6 +97,12 @@
     <Compile Include="FormProductBlank.Designer.cs">
       <DependentUpon>FormProductBlank.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProducts.Designer.cs">
+      <DependentUpon>FormProducts.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSklad.cs">
       <SubType>Form</SubType>
     </Compile>
