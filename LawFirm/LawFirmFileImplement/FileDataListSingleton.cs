@@ -1,4 +1,4 @@
-﻿using LawFirmBusinessLogics.Enums;
+﻿using LawFirmLogic.Enums;
 using LawFirmFileImplement.Models;
 using System;
 using System.Collections.Generic;

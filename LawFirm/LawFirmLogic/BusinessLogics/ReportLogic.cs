@@ -77,7 +77,7 @@ namespace LawFirmLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "Список заказов",
-                Orders = GetOrders(model)
+               // Orders = GetOrders(model)
             });
         }
 
