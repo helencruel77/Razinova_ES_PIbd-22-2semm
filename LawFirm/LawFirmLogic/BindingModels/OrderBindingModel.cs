@@ -1,9 +1,9 @@
-﻿using LawFirmBusinessLogics.Enums;
+﻿using LawFirmLogic.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LawFirmBusinessLogics.BindingModels
+namespace LawFirmLogic.BindingModels
 {
     public class OrderBindingModel
     {
@@ -21,5 +21,8 @@ namespace LawFirmBusinessLogics.BindingModels
 
         public DateTime? DateImplement { get; set; }
 
+        public DateTime? DateFrom { get; set; }
+
+        public DateTime? DateTo { get; set; }
     }
 }

@@ -1,10 +1,10 @@
-﻿using LawFirmBusinessLogics.BindingModels;
-using LawFirmBusinessLogics.ViewModels;
+﻿using LawFirmLogic.BindingModels;
+using LawFirmLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LawFirmBusinessLogics.Interfaces
+namespace LawFirmLogic.Interfaces
 {
     public interface IBlankLogic
     {

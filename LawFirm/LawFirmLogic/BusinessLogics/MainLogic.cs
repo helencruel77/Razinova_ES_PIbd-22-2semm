@@ -1,11 +1,11 @@
-﻿using LawFirmBusinessLogics.BindingModels;
-using LawFirmBusinessLogics.Enums;
-using LawFirmBusinessLogics.Interfaces;
+﻿using LawFirmLogic.BindingModels;
+using LawFirmLogic.Enums;
+using LawFirmLogic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LawFirmBusinessLogics.BusinessLogics
+namespace LawFirmLogic.BusinessLogics
 {
     public class MainLogic
     {

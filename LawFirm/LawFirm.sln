@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawFirmListImplement", "Law
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawFirmFileImplement", "LawFirmFileImplement\LawFirmFileImplement.csproj", "{9B84FD48-16C2-4781-8F05-14EE1B41912C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LawFirmDataBaseImplement", "LawFirmDataBaseImplement\LawFirmDataBaseImplement.csproj", "{E51C8399-DC19-46CB-8F9A-62EF64C66E26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawFirmDataBaseImplement", "LawFirmDataBaseImplement\LawFirmDataBaseImplement.csproj", "{E51C8399-DC19-46CB-8F9A-62EF64C66E26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LawFirmBusinessLogics.BindingModels
+namespace LawFirmLogic.BindingModels
 {
     public class ProductBindingModel
     {

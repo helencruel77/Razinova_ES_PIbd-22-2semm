@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace LawFirmBusinessLogics.ViewModels
+namespace LawFirmLogic.ViewModels
 {
     public class ProductViewModel
     {
