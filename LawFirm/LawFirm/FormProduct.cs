@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using LawFirmBusinessLogics.BindingModels;
-using LawFirmBusinessLogics.Interfaces;
+using LawFirmLogic.BindingModels;
+using LawFirmLogic.Interfaces;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
-using LawFirmBusinessLogics.ViewModels;
+using LawFirmLogic.ViewModels;
 
 namespace LawFirmView
 {

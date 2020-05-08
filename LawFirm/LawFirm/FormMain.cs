@@ -1,7 +1,7 @@
 ﻿using LawFirm;
-using LawFirmBusinessLogics.BindingModels;
-using LawFirmBusinessLogics.BusinessLogics;
-using LawFirmBusinessLogics.Interfaces;
+using LawFirmLogic.BindingModels;
+using LawFirmLogic.BusinessLogics;
+using LawFirmLogic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

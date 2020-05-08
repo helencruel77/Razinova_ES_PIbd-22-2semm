@@ -46,11 +46,6 @@ namespace LawFirmLogic.BusinessLogics
             }
             return list;
         }
-        /// <summary>
-        /// Получение списка заказов за определенный период
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
         public List<IGrouping<DateTime, OrderViewModel>> GetOrders(ReportBindingModel model)
         {
             var list = orderLogic
@@ -65,10 +60,7 @@ namespace LawFirmLogic.BusinessLogics
 
             return list;
         }
-        /// <summary>
-        /// Сохранение компонент в файл-Word
-        /// </summary>
-        /// <param name="model"></param>
+
         public void SaveComponentsToWordFile(ReportBindingModel model)
         {
             SaveToWord.CreateDoc(new WordInfo
@@ -78,10 +70,7 @@ namespace LawFirmLogic.BusinessLogics
                 Products = productLogic.Read(null)
             });
         }
-        /// <summary>
-        /// Сохранение компонент с указаеним продуктов в файл-Excel
-        /// </summary>
-        /// <param name="model"></param>
+
         public void SaveOrdersToExcelFile(ReportBindingModel model)
         {
             SaveToExcel.CreateDoc(new ExcelInfo
@@ -92,10 +81,6 @@ namespace LawFirmLogic.BusinessLogics
             });
         }
 
-        /// <summary>
-        /// Сохранение заказов в файл-Pdf
-        /// </summary>
-        /// <param name="model"></param>
         public void SaveProductComponentsToPdfFile(ReportBindingModel model)
         {
             SaveToPdf.CreateDoc(new PdfInfo
