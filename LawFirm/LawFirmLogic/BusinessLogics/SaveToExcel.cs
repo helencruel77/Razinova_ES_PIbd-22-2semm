@@ -8,6 +8,8 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System.Linq;
 using LawFirmLogic.HelperModels;
+using LawFirmLogic.ViewModels;
+using LawFirmLogic.BindingModels;
 
 namespace LawFirmLogic.BusinessLogics
 {
@@ -62,33 +64,57 @@ namespace LawFirmLogic.BusinessLogics
                     CellFromName = "A1",
                     CellToName = "C1"
                 });
-                uint rowIndex = 2;
-
-                List<DateTime> dates = new List<DateTime>();
-                foreach (var order in info.Orders)
+                InsertCellInWorksheet(new ExcelCellParameters
                 {
-                    if (!dates.Contains(order.DateCreate.Date))
-                    {
-                        dates.Add(order.DateCreate.Date);
-                    }
+                    Worksheet = worksheetPart.Worksheet,
+                    ShareStringPart = shareStringPart,
+                    ColumnName = "A",
+                    RowIndex = 2,
+                    Text = "Дата",
+                    StyleIndex = 0U
+                });
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    Worksheet = worksheetPart.Worksheet,
+                    ShareStringPart = shareStringPart,
+                    ColumnName = "B",
+                    RowIndex = 2,
+                    Text = "Пакет документов",
+                    StyleIndex = 0U
+                });
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    Worksheet = worksheetPart.Worksheet,
+                    ShareStringPart = shareStringPart,
+                    ColumnName = "C",
+                    RowIndex = 2,
+                    Text = "Сумма заказа",
+                    StyleIndex = 0U
+                });
+                uint rowIndex = 3;
+                //собираем информацию по заказам в словарь
+                Dictionary<string, List<ReportOrdersViewModel>> dictOrders = new Dictionary<string, List<ReportOrdersViewModel>>();
+                foreach (var elem in info.Orders)
+                {
+                    if (!dictOrders.ContainsKey(elem.DateCreate.ToShortDateString()))
+                        dictOrders.Add(elem.DateCreate.ToShortDateString(), new List<ReportOrdersViewModel>() { elem });
+                    else
+                        dictOrders[elem.DateCreate.ToShortDateString()].Add(elem);
                 }
-                foreach (var date in dates)
+                foreach (var order in dictOrders)
                 {
-                    decimal dateSum = 0;
-
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "A",
                         RowIndex = rowIndex,
-                        Text = date.Date.ToString(),
+                        Text = order.Key,
                         StyleIndex = 0U
                     });
-
                     rowIndex++;
-
-                    foreach (var order in info.Orders.Where(rec => rec.DateCreate.Date == date.Date))
+                    decimal totalPrice = 0;
+                    foreach (var product in order.Value)
                     {
                         InsertCellInWorksheet(new ExcelCellParameters
                         {
@@ -96,48 +122,41 @@ namespace LawFirmLogic.BusinessLogics
                             ShareStringPart = shareStringPart,
                             ColumnName = "B",
                             RowIndex = rowIndex,
-                            Text = order.ProductName,
-                            StyleIndex = 1U
+                            Text = product.ProductName,
+                            StyleIndex = 0U
                         });
-
                         InsertCellInWorksheet(new ExcelCellParameters
                         {
                             Worksheet = worksheetPart.Worksheet,
                             ShareStringPart = shareStringPart,
                             ColumnName = "C",
                             RowIndex = rowIndex,
-                            Text = order.Sum.ToString(),
-                            StyleIndex = 1U
+                            Text = product.Sum.ToString(),
+                            StyleIndex = 0U
                         });
-
-                        dateSum += order.Sum;
-
+                        totalPrice += product.Sum;
                         rowIndex++;
                     }
-
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "A",
                         RowIndex = rowIndex,
-                        Text = "Итого",
+                        Text = "Всего",
                         StyleIndex = 0U
                     });
-
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "C",
                         RowIndex = rowIndex,
-                        Text = dateSum.ToString(),
+                        Text = totalPrice.ToString(),
                         StyleIndex = 0U
                     });
-
                     rowIndex++;
                 }
-
                 workbookpart.Workbook.Save();
             }
         }
