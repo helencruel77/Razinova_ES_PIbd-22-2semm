@@ -296,6 +296,9 @@
     <EmbeddedResource Include="FormProducts.resx">
       <DependentUpon>FormProducts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormReportProductBlanks .resx">
+      <DependentUpon>FormReportProductBlanks .cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -316,6 +319,11 @@
     <None Include="Properties\DataSources\LawFirmFileImplement.Models.Order.datasource" />
     <None Include="Properties\DataSources\LawFirmFileImplement.Models.Product.datasource" />
     <None Include="Properties\DataSources\LawFirmFileImplement.Models.ProductBlank.datasource" />
+    <None Include="Properties\DataSources\LawFirmLogic.ViewModels.BlankViewModel.datasource" />
+    <None Include="Properties\DataSources\LawFirmLogic.ViewModels.OrderViewModel.datasource" />
+    <None Include="Properties\DataSources\LawFirmLogic.ViewModels.ProductViewModel.datasource" />
+    <None Include="Properties\DataSources\LawFirmLogic.ViewModels.ReportOrdersViewModel.datasource" />
+    <None Include="Properties\DataSources\LawFirmLogic.ViewModels.ReportProductBlankViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

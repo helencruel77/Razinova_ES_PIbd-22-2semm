@@ -28,13 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
             this.ButtonToPdf = new System.Windows.Forms.Button();
+            this.ReportProductBlankViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.ReportProductBlankViewModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // reportViewer
             // 
-            this.reportViewer.LocalReport.ReportEmbeddedResource = "LawFirm.ReportProductBlank.rdlc";
+            reportDataSource1.Name = "DataSet";
+            reportDataSource1.Value = this.ReportProductBlankViewModelBindingSource;
+            this.reportViewer.LocalReport.DataSources.Add(reportDataSource1);
+            this.reportViewer.LocalReport.ReportEmbeddedResource = "LawFirm.Report.rdlc";
             this.reportViewer.Location = new System.Drawing.Point(3, 50);
             this.reportViewer.Name = "reportViewer";
             this.reportViewer.ServerReport.BearerToken = null;
@@ -52,6 +59,10 @@
             this.ButtonToPdf.UseVisualStyleBackColor = true;
             this.ButtonToPdf.Click += new System.EventHandler(this.ButtonToPdf_Click);
             // 
+            // ReportProductBlankViewModelBindingSource
+            // 
+            this.ReportProductBlankViewModelBindingSource.DataSource = typeof(LawFirmLogic.ViewModels.ReportProductBlankViewModel);
+            // 
             // FormReportProductBlanks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -61,6 +72,8 @@
             this.Controls.Add(this.reportViewer);
             this.Name = "FormReportProductBlanks";
             this.Text = "Бланки и пакеты документов";
+            this.Load += new System.EventHandler(this.FormReportProductBlanks_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.ReportProductBlankViewModelBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -68,5 +81,6 @@
         #endregion
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer;
         private System.Windows.Forms.Button ButtonToPdf;
+        private System.Windows.Forms.BindingSource ReportProductBlankViewModelBindingSource;
     }
 }

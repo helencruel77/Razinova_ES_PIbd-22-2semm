@@ -27,38 +27,52 @@ namespace LawFirmLogic.BusinessLogics
         /// <returns></returns>
         public List<ReportProductBlankViewModel> GetProductBlank()
         {
-            var products = productLogic.Read(null);
-            var list = new List<ReportProductBlankViewModel>();
-
-            foreach (var product in products)
+            List<ReportProductBlankViewModel> list = new List<ReportProductBlankViewModel>();
+            foreach (var product in productLogic.Read(null))
             {
-                foreach (var pc in product.ProductBlanks)
+                foreach (var blank in product.ProductBlanks)
                 {
-                    var record = new ReportProductBlankViewModel
+                    list.Add(new ReportProductBlankViewModel()
                     {
                         ProductName = product.ProductName,
-                        BlankName = pc.Value.Item1,
-                        TotalCount = pc.Value.Item2
-                    };
-
-                    list.Add(record);
+                        BlankName = blank.Value.Item1,
+                        TotalCount = blank.Value.Item2
+                    });
                 }
             }
             return list;
         }
-        public List<IGrouping<DateTime, OrderViewModel>> GetOrders(ReportBindingModel model)
+        public List<IGrouping<DateTime, ReportOrdersViewModel>> GetOrders(ReportBindingModel model)
         {
-            var list = orderLogic
-            .Read(new OrderBindingModel
+            return orderLogic.Read(new OrderBindingModel
             {
                 DateFrom = model.DateFrom,
                 DateTo = model.DateTo
             })
-            .GroupBy(rec => rec.DateCreate.Date)
-            .OrderBy(recG => recG.Key)
-            .ToList();
+            .Select(x => new ReportOrdersViewModel
+            {
+                DateCreate = x.DateCreate,
+               ProductName = x.ProductName,
+                Count = x.Count,
+                Sum = x.Sum,
+                Status = x.Status
+            })
+           .GroupBy(x => x.DateCreate)
+           .ToList();
+        }
 
-            return list;
+        public List<ReportOrdersViewModel> GetOrders()
+        {
+            return orderLogic.Read(null)
+            .Select(x => new ReportOrdersViewModel
+            {
+                DateCreate = x.DateCreate,
+                ProductName = x.ProductName,
+                Count = x.Count,
+                Sum = x.Sum,
+                Status = x.Status
+            })
+           .ToList();
         }
 
         public void SaveComponentsToWordFile(ReportBindingModel model)
@@ -77,7 +91,7 @@ namespace LawFirmLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "Список заказов",
-               // Orders = GetOrders(model)
+                Orders = GetOrders()
             });
         }
 

@@ -65,5 +65,10 @@ namespace LawFirm
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void FormReportProductBlanks_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

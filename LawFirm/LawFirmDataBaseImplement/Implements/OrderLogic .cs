@@ -62,20 +62,20 @@ namespace LawFirmDataBaseImplement.Implements
         {
             using (var context = new LawFirmDatabase())
             {
-                return context.Orders
-            .Include(rec => rec.Product )
-            .Where(rec => model == null || rec.Id == model.Id)
-            .Select(rec => new OrderViewModel
-            {
-                Id = rec.Id,
-                ProductName = rec.Product.ProductName,
-                Count = rec.Count,
-                Sum = rec.Sum,
-                Status = rec.Status,
-                DateCreate = rec.DateCreate,
-                DateImplement = rec.DateImplement
-            })
-            .ToList();
+                return context.Orders.Where(rec => model == null || model.Id.HasValue && rec.Id == model.Id ||
+                (model.DateTo.HasValue && model.DateFrom.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
+                .Include(ord => ord.Product)
+                .Select(rec => new OrderViewModel()
+                {
+                    Id = rec.Id,
+                    ProductId = rec.ProductId,
+                    ProductName = rec.Product.ProductName,
+                    Count = rec.Count,
+                    DateCreate = rec.DateCreate,
+                    DateImplement = rec.DateImplement,
+                    Status = rec.Status,
+                    Sum = rec.Sum
+                }).ToList();
             }
         }
 
