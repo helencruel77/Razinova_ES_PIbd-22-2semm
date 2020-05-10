@@ -20,6 +20,8 @@ namespace LawFirmLogic.BusinessLogics
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 ProductId = model.ProductId,
+                ClientId = model.ClientId,
+                ClientFIO = model.ClientFIO,
                 Count = model.Count,
                 Sum = model.Sum,
                 DateCreate = DateTime.Now,
@@ -44,6 +46,8 @@ namespace LawFirmLogic.BusinessLogics
             {
                 Id = order.Id,
                 ProductId = order.ProductId,
+                ClientId = order.ClientId,
+                ClientFIO = order.ClientFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -69,6 +73,8 @@ namespace LawFirmLogic.BusinessLogics
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
+                ClientFIO = order.ClientFIO,
                 ProductId = order.ProductId,
                 Count = order.Count,
                 Sum = order.Sum,
@@ -94,6 +100,8 @@ namespace LawFirmLogic.BusinessLogics
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
+                ClientFIO = order.ClientFIO,
                 ProductId = order.ProductId,
                 Count = order.Count,
                 Sum = order.Sum,

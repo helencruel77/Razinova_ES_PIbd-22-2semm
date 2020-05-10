@@ -8,7 +8,8 @@ namespace LawFirmLogic.BindingModels
     public class OrderBindingModel
     {
         public int? Id { get; set; }
-
+        public int? ClientId { set; get; }
+        public string ClientFIO { set; get; }
         public int ProductId { get; set; }
 
         public int Count { get; set; }
@@ -24,5 +25,6 @@ namespace LawFirmLogic.BindingModels
         public DateTime? DateFrom { get; set; }
 
         public DateTime? DateTo { get; set; }
+
     }
 }

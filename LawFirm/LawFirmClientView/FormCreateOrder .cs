@@ -1,54 +1,30 @@
 ﻿using LawFirmLogic.BindingModels;
-using LawFirmLogic.BusinessLogics;
 using LawFirmLogic.ViewModels;
-using LawFirmLogic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Unity;
 
-namespace LawFirmView
+namespace LawFirmClientView
 {
     public partial class FormCreateOrder : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly IProductLogic logicP;
-        private readonly MainLogic logicM;
-        private readonly IClientLogic logicC;
-        public FormCreateOrder(IProductLogic logicP, IClientLogic logicC, MainLogic logicM)
+        public FormCreateOrder()
         {
             InitializeComponent();
-            this.logicP = logicP;
-            this.logicM = logicM;
-            this.logicC = logicC;
         }
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
             try
             {
-                var listP = logicP.Read(null);
-                if (listP != null)
-                {
-                    comboBoxProduct.DisplayMember = "ProductName";
-                    comboBoxProduct.ValueMember = "Id";
-                    comboBoxProduct.DataSource = listP;
-                    comboBoxProduct.SelectedItem = null;
-                }
-
-                var listC = logicC.Read(null);
-                if (listC != null)
-                {
-                    ComboBoxClient.DisplayMember = "ClientFIO";
-                    ComboBoxClient.DataSource = listC;
-                    ComboBoxClient.SelectedItem = null;
-                }
+                comboBoxProduct.DisplayMember = "ProductName";
+                comboBoxProduct.ValueMember = "Id";
+                comboBoxProduct.DataSource =
+               APIClient.GetRequest<List<ProductViewModel>>("api/main/getproductlist");
+                comboBoxProduct.SelectedItem = null;
             }
             catch (Exception ex)
             {
@@ -64,13 +40,10 @@ namespace LawFirmView
                 try
                 {
                     int id = Convert.ToInt32(comboBoxProduct.SelectedValue);
-                    ProductViewModel product = logicP.Read(new ProductBindingModel
-                    {
-                        Id =
-                    id
-                    })?[0];
+                    ProductViewModel product =
+APIClient.GetRequest<ProductViewModel>($"api/main/getproduct?productId={id}");
                     int count = Convert.ToInt32(textBoxCount.Text);
-                    textBoxSum.Text = (count * product?.Price ?? 0).ToString();
+                    textBoxSum.Text = (count * product.Price).ToString();
                 }
                 catch (Exception ex)
                 {
@@ -101,22 +74,17 @@ namespace LawFirmView
                MessageBoxIcon.Error);
                 return;
             }
-            if (ComboBoxClient.SelectedValue == null)
-            {
-                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             try
             {
-                logicM.CreateOrder(new CreateOrderBindingModel
+                APIClient.PostRequest("api/main/createorder", new CreateOrderBindingModel
                 {
+                    ClientId = Program.Client.Id,
                     ProductId = Convert.ToInt32(comboBoxProduct.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
-                    Sum = Convert.ToDecimal(textBoxSum.Text),
-                    ClientId = Convert.ToInt32(ComboBoxClient.SelectedValue)
+                    Sum = Convert.ToDecimal(textBoxSum.Text)
                 });
-                MessageBox.Show("Сохранение прошло успешно", "Сообщение",
-               MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Заказ создан", "Сообщение", MessageBoxButtons.OK,
+               MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
                 Close();
             }
@@ -125,11 +93,6 @@ namespace LawFirmView
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
-        }
-        private void ButtonCancel_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using LawFirmLogic.BindingModels;
 using LawFirmLogic.Interfaces;
 using LawFirmLogic.ViewModels;
-using LawFirmDataBaseImplement.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using LawFirmDataBaseImplement.Models;
 
 namespace LawFirmDataBaseImplement.Implements
 {
@@ -26,11 +26,12 @@ namespace LawFirmDataBaseImplement.Implements
                 }
                 else
                 {
-                    element = new Order {};
+                    element = new Order { };
                     context.Orders.Add(element);
                 }
                 element.ProductId = model.ProductId == 0 ? element.ProductId : model.ProductId;
                 element.Count = model.Count;
+                element.ClientId = model.ClientId == 0 ? element.ClientId : (int)model.ClientId;
                 element.Sum = model.Sum;
                 element.Status = model.Status;
                 element.DateCreate = model.DateCreate;
@@ -62,20 +63,25 @@ namespace LawFirmDataBaseImplement.Implements
         {
             using (var context = new LawFirmDatabase())
             {
-                return context.Orders.Where(rec => model == null || model.Id.HasValue && rec.Id == model.Id ||
-                (model.DateTo.HasValue && model.DateFrom.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
-                .Include(ord => ord.Product)
-                .Select(rec => new OrderViewModel()
-                {
-                    Id = rec.Id,
-                    ProductId = rec.ProductId,
-                    ProductName = rec.Product.ProductName,
-                    Count = rec.Count,
-                    DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement,
-                    Status = rec.Status,
-                    Sum = rec.Sum
-                }).ToList();
+                return context.Orders
+                 .Where(rec => model == null || rec.Id == model.Id && model.Id.HasValue
+                    || model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo
+                    || (model.ClientId.HasValue && rec.ClientId == model.ClientId))
+                 .Include(rec => rec.Client)
+                 .Select(rec => new OrderViewModel
+                 {
+                     Id = rec.Id,
+                     ClientId = rec.ClientId,
+                     ProductId = rec.ProductId,
+                     Count = rec.Count,
+                     Sum = rec.Sum,
+                     Status = rec.Status,
+                     DateCreate = rec.DateCreate,
+                     DateImplement = rec.DateImplement,
+                     ProductName = rec.Product.ProductName,
+                     ClientFIO = rec.Client.ClientFIO
+                 })
+            .ToList();
             }
         }
 

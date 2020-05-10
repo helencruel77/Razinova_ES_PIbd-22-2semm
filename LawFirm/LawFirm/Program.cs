@@ -1,11 +1,10 @@
-﻿using LawFirmLogic.BusinessLogics;
-using LawFirmLogic.Interfaces;
-using LawFirmDataBaseImplement.Implements;
+﻿using LawFirmDataBaseImplement.Implements;
 using System;
 using System.Windows.Forms;
 using Unity;
 using Unity.Lifetime;
-
+using LawFirmLogic.Interfaces;
+using LawFirmLogic.BusinessLogics;
 
 namespace LawFirmView
 {
@@ -27,15 +26,14 @@ namespace LawFirmView
             var currentContainer = new UnityContainer();
             currentContainer.RegisterType<IBlankLogic, BlankLogic>(new
            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IClientLogic, ClientLogic>(new
+           HierarchicalLifetimeManager());
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IProductLogic, ProductLogic>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<ReportLogic>(new
-           HierarchicalLifetimeManager());
             return currentContainer;
-
         }
     }
 }

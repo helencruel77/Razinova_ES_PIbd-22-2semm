@@ -1,5 +1,4 @@
-﻿
-using LawFirmListImplement.Models;
+﻿using LawFirmListImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,12 +12,14 @@ namespace LawFirmListImplement
         public List<Order> Orders { get; set; }
         public List<Product> Products { get; set; }
         public List<ProductBlank> ProductBlanks { get; set; }
+        public List<Client> Clients { set; get; }
         private DataListSingleton()
         {
             Blanks = new List<Blank>();
             Orders = new List<Order>();
             Products = new List<Product>();
             ProductBlanks = new List<ProductBlank>();
+            Clients = new List<Client>();
         }
         public static DataListSingleton GetInstance()
         {

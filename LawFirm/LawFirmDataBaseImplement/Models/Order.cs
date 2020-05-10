@@ -1,4 +1,5 @@
 ﻿using LawFirmLogic.Enums;
+using LawFirmDataBaseImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +11,7 @@ namespace LawFirmDataBaseImplement.Models
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
+        public int ClientId { set; get; }
         [Required]
         public int Count { get; set; }
         [Required]
@@ -19,7 +21,8 @@ namespace LawFirmDataBaseImplement.Models
         [Required]
         public DateTime DateCreate { get; set; }
         public DateTime? DateImplement { get; set; }
-        public virtual Product Product { get; set; }
+        public Client Client { set; get; }
+        public Product Product { get; set; }
 
     }
 }

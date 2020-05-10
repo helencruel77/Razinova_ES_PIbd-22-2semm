@@ -36,6 +36,7 @@ namespace LawFirmFileImplement.Implements
                 source.Orders.Add(element);
             }
             element.ProductId = model.ProductId == 0 ? element.ProductId : model.ProductId;
+            element.ClientId = model.ClientId == 0 ? element.ClientId : (int)model.ClientId;
             element.Count = model.Count;
             element.Sum = model.Sum;
             element.Status = model.Status;
@@ -61,19 +62,27 @@ namespace LawFirmFileImplement.Implements
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
             return source.Orders
-             .Where(rec => model == null || model.Id.HasValue && rec.Id == model.Id ||
-             (model.DateTo.HasValue && model.DateFrom.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
-             .Select(rec => new OrderViewModel
-             {
-                 Id = rec.Id,
-                 ProductId = rec.ProductId,
-                 ProductName = source.Products.FirstOrDefault((r) => r.Id == rec.ProductId).ProductName,
-                 Count = rec.Count,
-                 DateCreate = rec.DateCreate,
-                 DateImplement = rec.DateImplement,
-                 Status = rec.Status,
-                 Sum = rec.Sum
-             }).ToList();
+            .Where(rec => model == null || rec.Id == model.Id)
+            .Select(rec => new OrderViewModel
+            {
+                Id = rec.Id,
+                ProductName = GetProductName(rec.ProductId),
+                ClientId = rec.ClientId,
+                Count = rec.Count,
+                Sum = rec.Sum,
+                Status = rec.Status,
+                DateCreate = rec.DateCreate,
+                DateImplement = rec.DateImplement
+            })
+            .ToList();
+        }
+
+        private string GetProductName(int productId)
+        {
+            string name = "";
+            var product = source.Products.FirstOrDefault(x => x.Id == productId);
+            name = product != null ? product.ProductName : "";
+            return name;
         }
     }
 }

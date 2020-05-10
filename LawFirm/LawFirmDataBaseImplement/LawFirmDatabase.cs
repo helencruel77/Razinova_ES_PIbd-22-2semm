@@ -20,5 +20,6 @@ namespace LawFirmDataBaseImplement
         public virtual DbSet<Product> Products { set; get; }
         public virtual DbSet<ProductBlank> ProductBlanks { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
+        public virtual DbSet<Client> Clients { set; get; }
     }
 }

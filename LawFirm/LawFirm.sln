@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawFirmFileImplement", "Law
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawFirmDataBaseImplement", "LawFirmDataBaseImplement\LawFirmDataBaseImplement.csproj", "{E51C8399-DC19-46CB-8F9A-62EF64C66E26}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LawFirmRestAPI", "LawFirmRestAPI\LawFirmRestAPI.csproj", "{22079F9C-3586-4EBA-BC66-4FA2A8904CB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LawFirmClientView", "LawFirmClientView\LawFirmClientView.csproj", "{4E78A780-E06A-43AB-ADE8-FF2E85278561}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +47,14 @@ Global
 		{E51C8399-DC19-46CB-8F9A-62EF64C66E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E51C8399-DC19-46CB-8F9A-62EF64C66E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E51C8399-DC19-46CB-8F9A-62EF64C66E26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22079F9C-3586-4EBA-BC66-4FA2A8904CB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22079F9C-3586-4EBA-BC66-4FA2A8904CB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22079F9C-3586-4EBA-BC66-4FA2A8904CB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22079F9C-3586-4EBA-BC66-4FA2A8904CB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E78A780-E06A-43AB-ADE8-FF2E85278561}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E78A780-E06A-43AB-ADE8-FF2E85278561}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E78A780-E06A-43AB-ADE8-FF2E85278561}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E78A780-E06A-43AB-ADE8-FF2E85278561}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

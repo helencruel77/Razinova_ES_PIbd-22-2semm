@@ -52,6 +52,8 @@ namespace LawFirmListImplement.Implements
         {
             tempOrder.ProductId = model.ProductId == 0 ? tempOrder.ProductId : model.ProductId;
             tempOrder.Count = model.Count;
+            tempOrder.ClientId = model.ClientId.Value;
+            tempOrder.ClientFIO = model.ClientFIO;
             tempOrder.Sum = model.Sum;
             tempOrder.Status = model.Status;
             tempOrder.DateCreate = model.DateCreate;
@@ -75,23 +77,18 @@ namespace LawFirmListImplement.Implements
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
             List<OrderViewModel> result = new List<OrderViewModel>();
-            foreach (var order in source.Orders)
+            foreach (var Order in source.Orders)
             {
                 if (model != null)
                 {
-                    if (order.Id == model.Id && model.Id.HasValue)
+                    if (Order.Id == model.Id)
                     {
-                        result.Add(CreateViewModel(order));
+                        result.Add(CreateViewModel(Order));
                         break;
-                    }
-                    else if (model.DateFrom.HasValue && model.DateTo.HasValue &&
-                       order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
-                    {
-                        result.Add(CreateViewModel(order));
                     }
                     continue;
                 }
-                result.Add(CreateViewModel(order));
+                result.Add(CreateViewModel(Order));
             }
             return result;
         }
@@ -111,6 +108,8 @@ namespace LawFirmListImplement.Implements
             {
                 Id = order.Id,
                 ProductName = ProductName,
+                ClientId = order.ClientId,
+                ClientFIO = order.ClientFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
