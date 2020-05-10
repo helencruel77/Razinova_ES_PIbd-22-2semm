@@ -32,7 +32,7 @@ namespace LawFirmBusinessLogics.BusinessLogics
 
         public void FillUpSklad (SkladBlankBindingModel model)
         {
-            skladLogic.FillSklad(model);
+            skladLogic.FillUpSklad(model);
         }
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
