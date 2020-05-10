@@ -1,5 +1,6 @@
 ﻿using LawFirmBusinessLogics.BindingModels;
 using LawFirmBusinessLogics.Interfaces;
+using LawFirmBusinessLogics.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,6 +29,7 @@ namespace LawFirmView
 
         private void FormSklad_Load(object sender, EventArgs e)
         {
+
             if (id.HasValue)
             {
                 try
@@ -37,14 +39,22 @@ namespace LawFirmView
                     {
                         textBoxName.Text = view.SkladName;
                     }
-                    var List = logic.GetList();
-                    var skladBlanks = List[0].SkladBlanks;
-                    for (int i = 0; i < List.Count; ++i)
+                    var skladList = logic.GetList();
+                    var skladBlanks = skladList[0].SkladBlanks;
+                    for (int i = 0; i < skladList.Count; ++i)
                     {
-                        if (List[i].Id == id)
+                        if (skladList[i].Id == id)
                         {
-                            skladBlanks = List[i].SkladBlanks;
+                            skladBlanks = skladList[i].SkladBlanks;
                         }
+                    }
+                    if (skladBlanks != null)
+                    {
+                        dataGridView.DataSource = skladBlanks;
+                        dataGridView.Columns[0].Visible = false;
+                        dataGridView.Columns[1].Visible = false;
+                        dataGridView.Columns[2].Visible = false;
+                        dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     }
                 }
                 catch (Exception ex)
@@ -55,37 +65,37 @@ namespace LawFirmView
             }
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(textBoxName.Text))
+            private void buttonSave_Click(object sender, EventArgs e)
             {
-                MessageBox.Show("Заполните название", "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
-                return;
-            }
-            try
-            {
-                logic.CreateOrUpdate(new SkladBindingModel
+                if (string.IsNullOrEmpty(textBoxName.Text))
                 {
-                    Id = id,
-                    SkladName = textBoxName.Text
-                });
-                MessageBox.Show("Сохранение прошло успешно", "Сообщение",
-               MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DialogResult = DialogResult.OK;
+                    MessageBox.Show("Заполните название", "Ошибка", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                    return;
+                }
+                try
+                {
+                    logic.CreateOrUpdate(new SkladBindingModel
+                    {
+                        Id = id,
+                        SkladName = textBoxName.Text
+                    });
+                    MessageBox.Show("Сохранение прошло успешно", "Сообщение",
+                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                }
+            }
+
+            private void buttonCancel_Click(object sender, EventArgs e)
+            {
+                DialogResult = DialogResult.Cancel;
                 Close();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
-            }
-        }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
         }
     }
-}

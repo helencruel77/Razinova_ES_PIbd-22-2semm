@@ -1,7 +1,6 @@
 ﻿using LawFirmBusinessLogics.BindingModels;
 using LawFirmBusinessLogics.Enums;
 using LawFirmBusinessLogics.Interfaces;
-using LawFirmLogic.BindingModels;
 using System;
 using System.Collections.Generic;
 using System.Text;

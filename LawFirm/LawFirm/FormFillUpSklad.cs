@@ -1,7 +1,7 @@
 ﻿using LawFirmBusinessLogics.BusinessLogics;
 using LawFirmBusinessLogics.Interfaces;
 using LawFirmBusinessLogics.ViewModels;
-using LawFirmLogic.BindingModels;
+using LawFirmBusinessLogics.BindingModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,16 +29,16 @@ namespace LawFirmView
             this.blanklogic = blanklogic;
             this.mainlogic = mainlogic;
         }
-        private void FormFillUpSklad_Load(object sender, EventArgs e)
+        private void FormSklad_Load(object sender, EventArgs e)
         {
             try
             {
-                var SList = skladlogic.GetList();
-                comboBoxSklad.DataSource = SList;
+                var listS = skladlogic.GetList();
+                comboBoxSklad.DataSource = listS;
                 comboBoxSklad.DisplayMember = "SkladName";
                 comboBoxSklad.ValueMember = "Id";
-                var BList = blanklogic.Read(null);
-                comboBoxBlank.DataSource = BList;
+                var listB = blanklogic.Read(null);
+                comboBoxBlank.DataSource = listB;
                 comboBoxBlank.DisplayMember = "BlankName";
                 comboBoxBlank.ValueMember = "Id";
             }
@@ -47,7 +47,9 @@ namespace LawFirmView
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             }
+
         }
+
         private void buttonSave_Click(object sender, EventArgs e)
         {
             if (comboBoxSklad.SelectedValue == null)
@@ -70,14 +72,12 @@ namespace LawFirmView
             }
             try
             {
-                int skladId = Convert.ToInt32(comboBoxSklad.SelectedValue);
-                int blankId = Convert.ToInt32(comboBoxBlank.SelectedValue);
-                int count = Convert.ToInt32(textBoxCount.Text);
-                this.mainlogic.FillUpSklad(new SkladBlankBindingModel
+                mainlogic.FillUpSklad(new SkladBlankBindingModel
                 {
-                    SkladId = skladId,
-                    BlankId = blankId,
-                    Count = count
+                    Id = 0,
+                    SkladId = Convert.ToInt32(comboBoxSklad.SelectedValue),
+                    BlankId = Convert.ToInt32(comboBoxBlank.SelectedValue),
+                    Count = Convert.ToInt32(textBoxCount.Text)
                 });
                 MessageBox.Show("Сохранение прошло усешно", "Сообщение",
                   MessageBoxButtons.OK, MessageBoxIcon.Information);

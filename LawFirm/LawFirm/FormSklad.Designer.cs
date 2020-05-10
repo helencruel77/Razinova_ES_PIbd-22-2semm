@@ -32,6 +32,8 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.textBoxName = new System.Windows.Forms.TextBox();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // labelName
@@ -45,7 +47,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(247, 71);
+            this.buttonCancel.Location = new System.Drawing.Point(247, 244);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(102, 23);
             this.buttonCancel.TabIndex = 6;
@@ -55,7 +57,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(117, 71);
+            this.buttonSave.Location = new System.Drawing.Point(78, 244);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(102, 23);
             this.buttonSave.TabIndex = 5;
@@ -70,17 +72,28 @@
             this.textBoxName.Size = new System.Drawing.Size(271, 20);
             this.textBoxName.TabIndex = 4;
             // 
+            // dataGridView
+            // 
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Location = new System.Drawing.Point(78, 52);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.Size = new System.Drawing.Size(271, 186);
+            this.dataGridView.TabIndex = 7;
+            // 
             // FormSklad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(373, 107);
+            this.ClientSize = new System.Drawing.Size(412, 281);
+            this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.labelName);
             this.Name = "FormSklad";
             this.Text = "Создать склад";
+            this.Load += new System.EventHandler(this.FormSklad_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -92,5 +105,6 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.DataGridView dataGridView;
     }
 }

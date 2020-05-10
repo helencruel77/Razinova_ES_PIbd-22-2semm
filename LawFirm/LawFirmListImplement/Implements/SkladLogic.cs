@@ -5,66 +5,66 @@ using LawFirmBusinessLogics.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using LawFirmLogic.BindingModels;
+using System.Linq;
 
 namespace LawFirmListImplement.Implements
 {
     public class SkladLogic : ISkladLogic
     {
         private readonly DataListSingleton source;
+
         public SkladLogic()
         {
             source = DataListSingleton.GetInstance();
         }
-        public void CreateOrUpdate(SkladBindingModel model)
+
+        public void CreateOrUpdate(SkladBindingModel sklad)
         {
-            Sklad tempSklad = model.Id.HasValue ? null : new Sklad
+            Sklad tempSklad = sklad.Id.HasValue ? null : new Sklad
             {
                 Id = 1
             };
-            foreach (var sklad in source.Sklads)
+            foreach (var s in source.Sklads)
             {
-                if (sklad.SkladName == model.SkladName && sklad.Id !=
-               model.Id)
+                if (s.SkladName == sklad.SkladName && s.Id != sklad.Id)
                 {
                     throw new Exception("Уже есть склад с таким названием");
                 }
-                if (!model.Id.HasValue && sklad.Id >= tempSklad.Id)
+                if (!sklad.Id.HasValue && s.Id >= tempSklad.Id)
                 {
-                    tempSklad.Id = sklad.Id + 1;
+                    tempSklad.Id = s.Id + 1;
                 }
-                else if (model.Id.HasValue && sklad.Id == model.Id)
+                else if (sklad.Id.HasValue && s.Id == sklad.Id)
                 {
-                    tempSklad = sklad;
+                    tempSklad = s;
                 }
             }
-            if (model.Id.HasValue)
+            if (sklad.Id.HasValue)
             {
                 if (tempSklad == null)
                 {
                     throw new Exception("Элемент не найден");
                 }
-                CreateModel(model, tempSklad);
+                tempSklad.SkladName = sklad.SkladName;
             }
             else
             {
-                source.Sklads.Add(CreateModel(model, tempSklad));
+                source.Sklads.Add(new Sklad()
+                {
+                    Id = tempSklad.Id,
+                    SkladName = sklad.SkladName
+                }
+                );
             }
-        }
-
-        private Sklad CreateModel(SkladBindingModel model, Sklad sklad)
-        {
-            sklad.SkladName = model.SkladName;
-            return sklad;
         }
 
         public void Delete(SkladBindingModel model)
         {
-            for (int i = 0; i < source.Sklads.Count; ++i)
+            for (int i = 0; i < source.SkladBlanks.Count; ++i)
             {
-                if (source.Sklads[i].Id == model.Id)
+                if (source.SkladBlanks[i].SkladId == model.Id)
                 {
-                    source.Sklads.RemoveAt(i--);
+                    source.SkladBlanks.RemoveAt(i--);
                 }
             }
             for (int i = 0; i < source.Sklads.Count; ++i)
@@ -118,48 +118,8 @@ namespace LawFirmListImplement.Implements
             }
             return result;
         }
-
-
-        public void FillUpSklad(SkladBlankBindingModel model)
-        {
-            int foundItemIndex = -1;
-            for (int i = 0; i < source.SkladBlanks.Count; ++i)
-            {
-                if (source.SkladBlanks[i].BlankId == model.BlankId
-                    && source.SkladBlanks[i].SkladId == model.SkladId)
-                {
-                    foundItemIndex = i;
-                    break;
-                }
-            }
-            if (foundItemIndex != -1)
-            {
-                source.SkladBlanks[foundItemIndex].Count =
-                    source.SkladBlanks[foundItemIndex].Count + model.Count;
-            }
-            else
-            {
-                int maxId = 0;
-                for (int i = 0; i < source.SkladBlanks.Count; ++i)
-                {
-                    if (source.SkladBlanks[i].Id > maxId)
-                    {
-                        maxId = source.SkladBlanks[i].Id;
-                    }
-                }
-                source.SkladBlanks.Add(new SkladBlank
-                {
-                    Id = maxId + 1,
-                    SkladId = model.SkladId,
-                    BlankId = model.BlankId,
-                    Count = model.Count
-                });
-            }
-        }
-
         public SkladViewModel GetElement(int id)
         {
-
             for (int i = 0; i < source.Sklads.Count; ++i)
             {
                 List<SkladBlankViewModel> SkladBlanks = new
@@ -199,6 +159,43 @@ namespace LawFirmListImplement.Implements
                 }
             }
             throw new Exception("Элемент не найден");
+        }
+
+        public void FillUpSklad(SkladBlankBindingModel model)
+        {
+            int foundItemIndex = -1;
+            for (int i = 0; i < source.SkladBlanks.Count; ++i)
+            {
+                if (source.SkladBlanks[i].BlankId == model.BlankId
+                    && source.SkladBlanks[i].SkladId == model.SkladId)
+                {
+                    foundItemIndex = i;
+                    break;
+                }
+            }
+            if (foundItemIndex != -1)
+            {
+                source.SkladBlanks[foundItemIndex].Count =
+                    source.SkladBlanks[foundItemIndex].Count + model.Count;
+            }
+            else
+            {
+                int maxId = 0;
+                for (int i = 0; i < source.SkladBlanks.Count; ++i)
+                {
+                    if (source.SkladBlanks[i].Id > maxId)
+                    {
+                        maxId = source.SkladBlanks[i].Id;
+                    }
+                }
+                source.SkladBlanks.Add(new SkladBlank
+                {
+                    Id = maxId + 1,
+                    SkladId = model.SkladId,
+                    BlankId = model.BlankId,
+                    Count = model.Count
+                });
+            }
         }
     }
 }

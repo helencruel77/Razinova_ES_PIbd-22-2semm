@@ -160,9 +160,9 @@
       <Project>{B617D3E5-A4C5-4D83-93A8-D94738611029}</Project>
       <Name>LawFirmListImplement</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LawFirmLogic\LawFirmLogic.csproj">
-      <Project>{6170cf54-5ef8-487d-87e6-6eb67d437c6d}</Project>
-      <Name>LawFirmLogic</Name>
+    <ProjectReference Include="..\LawFirmLogic\LawFirmBusinessLogics.csproj">
+      <Project>{6170CF54-5EF8-487D-87E6-6EB67D437C6D}</Project>
+      <Name>LawFirmBusinessLogics</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

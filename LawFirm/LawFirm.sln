@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LawFirmView", "LawFirm\LawFirmView.csproj", "{2000977C-E34B-45FF-913E-9C4C6F5C6CE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LawFirmLogic", "LawFirmLogic\LawFirmLogic.csproj", "{6170CF54-5EF8-487D-87E6-6EB67D437C6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawFirmBusinessLogics", "LawFirmLogic\LawFirmBusinessLogics.csproj", "{6170CF54-5EF8-487D-87E6-6EB67D437C6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LawFirmListImplement", "LawFirmListImplement\LawFirmListImplement.csproj", "{B617D3E5-A4C5-4D83-93A8-D94738611029}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawFirmListImplement", "LawFirmListImplement\LawFirmListImplement.csproj", "{B617D3E5-A4C5-4D83-93A8-D94738611029}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

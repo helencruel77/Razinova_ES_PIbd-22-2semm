@@ -123,7 +123,7 @@
             this.Controls.Add(this.labelSklad);
             this.Name = "FormFillUpSklad";
             this.Text = "Пополнить склад";
-            this.Load += new System.EventHandler(this.FormFillUpSklad_Load);
+            this.Load += new System.EventHandler(this.FormSklad_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
