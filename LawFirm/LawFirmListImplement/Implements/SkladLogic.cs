@@ -16,68 +16,6 @@ namespace LawFirmListImplement.Implements
         {
             source = DataListSingleton.GetInstance();
         }
-        public void CreateOrUpdate(SkladBindingModel model)
-        {
-            Sklad tempSklad = model.Id.HasValue ? null : new Sklad
-            {
-                Id = 1
-            };
-            foreach (var sklad in source.Sklads)
-            {
-                if (sklad.SkladName == model.SkladName && sklad.Id !=
-               model.Id)
-                {
-                    throw new Exception("Уже есть склад с таким названием");
-                }
-                if (!model.Id.HasValue && sklad.Id >= tempSklad.Id)
-                {
-                    tempSklad.Id = sklad.Id + 1;
-                }
-                else if (model.Id.HasValue && sklad.Id == model.Id)
-                {
-                    tempSklad = sklad;
-                }
-            }
-            if (model.Id.HasValue)
-            {
-                if (tempSklad == null)
-                {
-                    throw new Exception("Элемент не найден");
-                }
-                CreateModel(model, tempSklad);
-            }
-            else
-            {
-                source.Sklads.Add(CreateModel(model, tempSklad));
-            }
-        }
-
-        private Sklad CreateModel(SkladBindingModel model, Sklad sklad)
-        {
-            sklad.SkladName = model.SkladName;
-            return sklad;
-        }
-
-        public void Delete(SkladBindingModel model)
-        {
-            for (int i = 0; i < source.Sklads.Count; ++i)
-            {
-                if (source.Sklads[i].Id == model.Id)
-                {
-                    source.Sklads.RemoveAt(i--);
-                }
-            }
-            for (int i = 0; i < source.Sklads.Count; ++i)
-            {
-                if (source.Sklads[i].Id == model.Id)
-                {
-                    source.Sklads.RemoveAt(i);
-                    return;
-                }
-            }
-            throw new Exception("Элемент не найден");
-        }
-
         public List<SkladViewModel> GetList()
         {
             List<SkladViewModel> result = new List<SkladViewModel>();
@@ -90,7 +28,7 @@ namespace LawFirmListImplement.Implements
                     if (source.SkladBlanks[j].SkladId == source.Sklads[i].Id)
                     {
                         string BlankName = string.Empty;
-                        for (int k = 0; k < source.Blanks.Count; ++k)
+                        for (int k = 0; k < source.Sklads.Count; ++k)
                         {
                             if (source.SkladBlanks[j].BlankId ==
                            source.Blanks[k].Id)
@@ -118,48 +56,8 @@ namespace LawFirmListImplement.Implements
             }
             return result;
         }
-
-
-        public void FillUpSklad(SkladBlankBindingModel model)
-        {
-            int foundItemIndex = -1;
-            for (int i = 0; i < source.SkladBlanks.Count; ++i)
-            {
-                if (source.SkladBlanks[i].BlankId == model.BlankId
-                    && source.SkladBlanks[i].SkladId == model.SkladId)
-                {
-                    foundItemIndex = i;
-                    break;
-                }
-            }
-            if (foundItemIndex != -1)
-            {
-                source.SkladBlanks[foundItemIndex].Count =
-                    source.SkladBlanks[foundItemIndex].Count + model.Count;
-            }
-            else
-            {
-                int maxId = 0;
-                for (int i = 0; i < source.SkladBlanks.Count; ++i)
-                {
-                    if (source.SkladBlanks[i].Id > maxId)
-                    {
-                        maxId = source.SkladBlanks[i].Id;
-                    }
-                }
-                source.SkladBlanks.Add(new SkladBlank
-                {
-                    Id = maxId + 1,
-                    SkladId = model.SkladId,
-                    BlankId = model.BlankId,
-                    Count = model.Count
-                });
-            }
-        }
-
         public SkladViewModel GetElement(int id)
         {
-
             for (int i = 0; i < source.Sklads.Count; ++i)
             {
                 List<SkladBlankViewModel> SkladBlanks = new
@@ -199,6 +97,102 @@ namespace LawFirmListImplement.Implements
                 }
             }
             throw new Exception("Элемент не найден");
+        }
+        public void AddElement(SkladBindingModel model)
+        {
+            int maxId = 0;
+            for (int i = 0; i < source.Sklads.Count; ++i)
+            {
+                if (source.Sklads[i].Id > maxId)
+                {
+                    maxId = source.Sklads[i].Id;
+                }
+                if (source.Sklads[i].SkladName == model.SkladName)
+                {
+                    throw new Exception("Уже есть склад с таким названием");
+                }
+            }
+            source.Sklads.Add(new Sklad
+            {
+                Id = maxId + 1,
+                SkladName = model.SkladName
+            });
+        }
+        public void UpdElement(SkladBindingModel model)
+        {
+            int index = -1;
+            for (int i = 0; i < source.Sklads.Count; ++i)
+            {
+                if (source.Sklads[i].Id == model.Id)
+                {
+                    index = i;
+                }
+                if (source.Sklads[i].SkladName == model.SkladName &&
+                source.Sklads[i].Id != model.Id)
+                {
+                    throw new Exception("Уже есть склад с таким названием");
+                }
+            }
+            if (index == -1)
+            {
+                throw new Exception("Элемент не найден");
+            }
+            source.Sklads[index].SkladName = model.SkladName;
+        }
+        public void DelElement(int id)
+        {
+            for (int i = 0; i < source.SkladBlanks.Count; ++i)
+            {
+                if (source.SkladBlanks[i].SkladId == id)
+                {
+                    source.SkladBlanks.RemoveAt(i--);
+                }
+            }
+            for (int i = 0; i < source.Sklads.Count; ++i)
+            {
+                if (source.Sklads[i].Id == id)
+                {
+                    source.Sklads.RemoveAt(i);
+                    return;
+                }
+            }
+            throw new Exception("Элемент не найден");
+        }
+        public void FillSklad(SkladBlankBindingModel model)
+        {
+            int foundItemIndex = -1;
+            for (int i = 0; i < source.SkladBlanks.Count; ++i)
+            {
+                if (source.SkladBlanks[i].BlankId == model.BlankId
+                    && source.SkladBlanks[i].SkladId == model.SkladId)
+                {
+                    foundItemIndex = i;
+                    break;
+                }
+            }
+            if (foundItemIndex != -1)
+            {
+                source.SkladBlanks[foundItemIndex].Count =
+                    source.SkladBlanks[foundItemIndex].Count + model.Count;
+            }
+            else
+            {
+                int maxId = 0;
+                for (int i = 0; i < source.SkladBlanks.Count; ++i)
+                {
+                    if (source.SkladBlanks[i].Id > maxId)
+                    {
+                        maxId = source.SkladBlanks[i].Id;
+                    }
+                }
+                source.SkladBlanks.Add(new SkladBlank
+                {
+                    Id = maxId + 1,
+                    SkladId = model.SkladId,
+                    BlankId = model.BlankId,
+                    Count = model.Count
+                });
+            }
         }
     }
 }

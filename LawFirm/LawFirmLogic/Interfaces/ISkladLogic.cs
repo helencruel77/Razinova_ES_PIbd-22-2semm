@@ -11,8 +11,9 @@ namespace LawFirmBusinessLogics.Interfaces
     {
         List<SkladViewModel> GetList();
         SkladViewModel GetElement(int id);
-        void CreateOrUpdate(SkladBindingModel model);
-        void Delete(SkladBindingModel model);
-        void FillUpSklad(SkladBlankBindingModel model);
+        void AddElement(SkladBindingModel model);
+        void UpdElement(SkladBindingModel model);
+        void DelElement(int id);
+        void FillSklad(SkladBlankBindingModel model);
     }
 }

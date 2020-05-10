@@ -37,14 +37,22 @@ namespace LawFirmView
                     {
                         textBoxName.Text = view.SkladName;
                     }
-                    var List = logic.GetList();
-                    var skladBlanks = List[0].SkladBlanks;
-                    for (int i = 0; i < List.Count; ++i)
+                    var skladList = logic.GetList();
+                    var skladBlanks = skladList[0].SkladBlanks;
+                    for (int i = 0; i < skladList.Count; ++i)
                     {
-                        if (List[i].Id == id)
+                        if (skladList[i].Id == id)
                         {
-                            skladBlanks = List[i].SkladBlanks;
+                            skladBlanks = skladList[i].SkladBlanks;
                         }
+                    }
+                    if (skladBlanks != null)
+                    {
+                        dataGridView.DataSource = skladBlanks;
+                        dataGridView.Columns[0].Visible = false;
+                        dataGridView.Columns[1].Visible = false;
+                        dataGridView.Columns[2].Visible = false;
+                        dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     }
                 }
                 catch (Exception ex)
@@ -65,11 +73,21 @@ namespace LawFirmView
             }
             try
             {
-                logic.CreateOrUpdate(new SkladBindingModel
+                if (id.HasValue)
                 {
-                    Id = id,
-                    SkladName = textBoxName.Text
-                });
+                    logic.UpdElement(new SkladBindingModel
+                    {
+                        Id = id.Value,
+                        SkladName = textBoxName.Text
+                    });
+                }
+                else
+                {
+                    logic.AddElement(new SkladBindingModel
+                    {
+                        SkladName = textBoxName.Text
+                    });
+                }
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
