@@ -22,12 +22,14 @@ namespace LawFirmView
         private readonly MainLogic logic;
         private readonly IOrderLogic orderLogic;
         private readonly ReportLogic report;
-        public FormMain(MainLogic logic, IOrderLogic orderLogic, ReportLogic report)
+        private readonly WorkModeling work;
+        public FormMain(WorkModeling work, MainLogic logic, IOrderLogic orderLogic, ReportLogic report)
         {
             InitializeComponent();
             this.logic = logic;
             this.orderLogic = orderLogic;
             this.report = report;
+            this.work = work;
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -35,24 +37,16 @@ namespace LawFirmView
         }
         private void LoadData()
         {
-            try
+            var listOrders = orderLogic.Read(null);
+            if (listOrders != null)
             {
-                var list = orderLogic.Read(null);
-                if (list != null)
-                {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridView.Columns[2].Visible = false;
-                    dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
+                dataGridView.DataSource = listOrders;
+                dataGridView.Columns[0].Visible = false;
+                dataGridView.Columns[1].Visible = false;
+                dataGridView.Columns[2].Visible = false;
+                dataGridView.Columns[5].Visible = false;
+                dataGridView.Columns[5].AutoSizeMode =
+               DataGridViewAutoSizeColumnMode.Fill;
             }
         }
         private void ButtonCreateOrder_Click(object sender, EventArgs e)
@@ -161,6 +155,17 @@ namespace LawFirmView
         {
             var form = Container.Resolve<FormClients>();
             form.ShowDialog();
+        }
+
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormImplementers>();
+            form.ShowDialog();
+        }
+
+        private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            work.DoWork();
         }
     }
 }

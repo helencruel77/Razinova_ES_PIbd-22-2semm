@@ -15,6 +15,11 @@ namespace LawFirmLogic.ViewModels
         [DataMember]
         public int ProductId { get; set; }
         [DataMember]
+        public int? ImplementerId { get; set; }
+        [DataMember]
+        [DisplayName("Исполнитель")]
+        public string ImplementerFIO { get; set; }
+        [DataMember]
         [DisplayName("Id клиента")]
         public int ClientId { set; get; }
         [DataMember]

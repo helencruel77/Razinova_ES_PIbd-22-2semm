@@ -5,6 +5,7 @@ using LawFirmListImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using LawFirmLogic.Enums;
 
 namespace LawFirmListImplement.Implements
 {
@@ -52,7 +53,7 @@ namespace LawFirmListImplement.Implements
         {
             tempOrder.ProductId = model.ProductId == 0 ? tempOrder.ProductId : model.ProductId;
             tempOrder.Count = model.Count;
-            tempOrder.ClientId = model.ClientId.Value;
+            tempOrder.ClientId = model.ClientId == 0 ? tempOrder.ClientId : (int)model.ClientId;
             tempOrder.ClientFIO = model.ClientFIO;
             tempOrder.Sum = model.Sum;
             tempOrder.Status = model.Status;
@@ -77,19 +78,24 @@ namespace LawFirmListImplement.Implements
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
             List<OrderViewModel> result = new List<OrderViewModel>();
-            foreach (var Order in source.Orders)
+
+            foreach (var order in source.Orders)
             {
-                if (model != null)
+                if (
+                    model != null && order.Id == model.Id
+                    || model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo
+                    || model.ClientId.HasValue && order.ClientId == model.ClientId
+                    || model.FreeOrders.HasValue && model.FreeOrders.Value
+                    || model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && order.Status == OrderStatus.Выполняется
+                )
                 {
-                    if (Order.Id == model.Id)
-                    {
-                        result.Add(CreateViewModel(Order));
-                        break;
-                    }
-                    continue;
+                    result.Add(CreateViewModel(order));
+                    break;
                 }
-                result.Add(CreateViewModel(Order));
+
+                result.Add(CreateViewModel(order));
             }
+
             return result;
         }
 

@@ -13,6 +13,7 @@ namespace LawFirmListImplement
         public List<Product> Products { get; set; }
         public List<ProductBlank> ProductBlanks { get; set; }
         public List<Client> Clients { set; get; }
+        public List<Implementer> Implementers { get; set; }
         private DataListSingleton()
         {
             Blanks = new List<Blank>();
@@ -20,6 +21,7 @@ namespace LawFirmListImplement
             Products = new List<Product>();
             ProductBlanks = new List<ProductBlank>();
             Clients = new List<Client>();
+            Implementers = new List<Implementer>();
         }
         public static DataListSingleton GetInstance()
         {

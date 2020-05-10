@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using LawFirmDataBaseImplement.Models;
+using LawFirmLogic.Enums;
 
 namespace LawFirmDataBaseImplement.Implements
 {
@@ -29,14 +30,16 @@ namespace LawFirmDataBaseImplement.Implements
                     element = new Order { };
                     context.Orders.Add(element);
                 }
-                element.ProductId = model.ProductId == 0 ? element.ProductId : model.ProductId;
                 element.Count = model.Count;
-                element.ClientId = model.ClientId == 0 ? element.ClientId : (int)model.ClientId;
-                element.Sum = model.Sum;
-                element.Status = model.Status;
                 element.DateCreate = model.DateCreate;
                 element.DateImplement = model.DateImplement;
+                element.ClientId = model.ClientId.Value;
+                element.ImplementerId = model.ImplementerId;
+                element.ProductId = model.ProductId;
+                element.Status = model.Status;
+                element.Sum = model.Sum;
                 context.SaveChanges();
+
             }
         }
 
@@ -64,25 +67,34 @@ namespace LawFirmDataBaseImplement.Implements
             using (var context = new LawFirmDatabase())
             {
                 return context.Orders
-                 .Where(rec => model == null || rec.Id == model.Id && model.Id.HasValue
-                    || model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo
-                    || (model.ClientId.HasValue && rec.ClientId == model.ClientId))
-                 .Include(rec => rec.Client)
-                 .Select(rec => new OrderViewModel
-                 {
-                     Id = rec.Id,
-                     ClientId = rec.ClientId,
-                     ProductId = rec.ProductId,
-                     Count = rec.Count,
-                     Sum = rec.Sum,
-                     Status = rec.Status,
-                     DateCreate = rec.DateCreate,
-                     DateImplement = rec.DateImplement,
-                     ProductName = rec.Product.ProductName,
-                     ClientFIO = rec.Client.ClientFIO
-                 })
-            .ToList();
+                .Where(rec => model == null || (rec.Id == model.Id &&
+               model.Id.HasValue) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate
+               >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
+                (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
+               (model.FreeOrders.HasValue && model.FreeOrders.Value &&
+               !rec.ImplementerId.HasValue) ||
+                (model.ImplementerId.HasValue && rec.ImplementerId ==
+               model.ImplementerId && rec.Status == OrderStatus.Выполняется))
+                .Select(rec => new OrderViewModel
+                {
+                    Id = rec.Id,
+                    ClientId = rec.ClientId,
+                    ImplementerId = rec.ImplementerId,
+                    ProductId = rec.ProductId,
+                    DateCreate = rec.DateCreate,
+                    DateImplement = rec.DateImplement,
+                    Status = rec.Status,
+                    Count = rec.Count,
+                    Sum = rec.Sum,
+                    ClientFIO = rec.Client.ClientFIO,
+                    ImplementerFIO = rec.ImplementerId.HasValue ?
+               rec.Implementer.ImplementerFIO : string.Empty,
+                    ProductName = rec.Product.ProductName
+                })
+               .ToList();
             }
+
         }
 
     }
