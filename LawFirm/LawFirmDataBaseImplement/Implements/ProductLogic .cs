@@ -47,12 +47,9 @@ namespace LawFirmDataBaseImplement.Implements
                         {
                             var productBlanks = context.ProductBlanks.Where(rec
                            => rec.ProductId == model.Id.Value).ToList();
-                            // удалили те, которых нет в модели
-
                             context.ProductBlanks.RemoveRange(productBlanks.Where(rec =>
                             !model.ProductBlanks.ContainsKey(rec.BlankId)).ToList());
                             context.SaveChanges();
-                            // обновили количество у существующих записей
                             foreach (var updateBlank in productBlanks)
                             {
                                 updateBlank.Count =

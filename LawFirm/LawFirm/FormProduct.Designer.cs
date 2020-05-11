@@ -149,15 +149,15 @@
             // 
             // Column1
             // 
-            this.Column1.HeaderText = "Бланк";
+            this.Column1.HeaderText = "Количество";
             this.Column1.Name = "Column1";
-            this.Column1.Width = 250;
+            this.Column1.Width = 140;
             // 
             // Column2
             // 
-            this.Column2.HeaderText = "Количество";
+            this.Column2.HeaderText = "Бланк";
             this.Column2.Name = "Column2";
-            this.Column2.Width = 140;
+            this.Column2.Width = 250;
             // 
             // FormProduct
             // 
