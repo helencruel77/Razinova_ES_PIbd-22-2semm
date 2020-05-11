@@ -41,7 +41,7 @@
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(60, 13);
             this.labelName.TabIndex = 0;
-            this.labelName.Text = "Навзание:";
+            this.labelName.Text = "Название:";
             // 
             // textBoxName
             // 
