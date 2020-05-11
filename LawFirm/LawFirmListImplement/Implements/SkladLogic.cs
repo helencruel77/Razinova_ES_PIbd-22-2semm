@@ -197,5 +197,39 @@ namespace LawFirmListImplement.Implements
                 });
             }
         }
+        public bool CheckAvailable(int ProductId, int ProductsCount)
+        {
+            bool result = true;
+            var ProductBlanks = source.ProductBlanks.Where(x => x.ProductId == ProductId);
+            if (ProductBlanks.Count() == 0) return false;
+            foreach (var elem in ProductBlanks)
+            {
+                int count = 0;
+                var skladBlanks = source.SkladBlanks.FindAll(x => x.BlankId == elem.BlankId);
+                count = skladBlanks.Sum(x => x.Count);
+                if (count < elem.Count * ProductsCount)
+                    return false;
+            }
+            return result;
+        }
+
+        public void DeleteFromSklad(int ProductId, int ProductsCount)
+        {
+            var ProductBlanks = source.ProductBlanks.Where(x => x.ProductId == ProductId);
+            if (ProductBlanks.Count() == 0) return;
+            foreach (var elem in ProductBlanks)
+            {
+                int left = elem.Count * ProductsCount;
+                var skladBlanks = source.ProductBlanks.FindAll(x => x.BlankId == elem.BlankId);
+                foreach (var rec in skladBlanks)
+                {
+                    int toRemove = left > rec.Count ? rec.Count : left;
+                    rec.Count -= toRemove;
+                    left -= toRemove;
+                    if (left == 0) break;
+                }
+            }
+            return;
+        }
     }
 }

@@ -15,16 +15,22 @@ namespace LawFirmFileImplement
         private readonly string OrderFileName = "Order.xml";
         private readonly string ProductFileName = "Product.xml";
         private readonly string ProductBlankFileName = "ProductBlank.xml";
+        private readonly string SkladFileName = "Sklad.xml";
+        private readonly string SkladBlankFileName = "SkladBlank.xml";
         public List<Blank> Blanks { get; set; }
         public List<Order> Orders { get; set; }
         public List<Product> Products { get; set; }
         public List<ProductBlank> ProductBlanks { get; set; }
+        public List<Sklad> Sklads { get; set; }
+        public List<SkladBlank> SkladBlanks { get; set; }
         private FileDataListSingleton()
         {
             Blanks = LoadBlanks();
             Orders = LoadOrders();
             Products = LoadProducts();
             ProductBlanks = LoadProductBlanks();
+            Sklads = LoadSklads();
+            SkladBlanks = LoadSkladBlanks();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -40,6 +46,8 @@ namespace LawFirmFileImplement
             SaveOrders();
             SaveProducts();
             SaveProductBlanks();
+            SaveSklads();
+            SaveSkladBlanks();
 
         }
         private List<Blank> LoadBlanks()
@@ -125,6 +133,83 @@ namespace LawFirmFileImplement
                 }
             }
             return list;
+        }
+        private List<Sklad> LoadSklads()
+        {
+            var list = new List<Sklad>();
+            if (File.Exists(SkladFileName))
+            {
+                XDocument xDocument = XDocument.Load(SkladFileName);
+                var xElements = xDocument.Root.Elements("Sklad").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Sklad()
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        SkladName = elem.Element("SkladName").Value.ToString()
+                    });
+                }
+            }
+            return list;
+        }
+        private List<SkladBlank> LoadSkladBlanks()
+        {
+            var list = new List<SkladBlank>();
+
+            if (File.Exists(SkladBlankFileName))
+            {
+                XDocument xDocument = XDocument.Load(SkladBlankFileName);
+                var xElements = xDocument.Root.Elements("SkladBlank").ToList();
+
+                foreach (var elem in xElements)
+                {
+                    list.Add(new SkladBlank
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        SkladId = Convert.ToInt32(elem.Element("SkladId").Value),
+                        BlankId = Convert.ToInt32(elem.Element("BlankId").Value),
+                        Count = Convert.ToInt32(elem.Element("Count").Value)
+                    });
+                }
+            }
+
+            return list;
+        }
+        private void SaveSklads()
+        {
+            if (Sklads != null)
+            {
+                var xElement = new XElement("Sklads");
+
+                foreach (var sklad in Sklads)
+                {
+                    xElement.Add(new XElement("Sklad",
+                    new XAttribute("Id", sklad.Id),
+                    new XElement("SkladName", sklad.SkladName)));
+                }
+
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(SkladFileName);
+            }
+        }
+        private void SaveSkladBlanks()
+        {
+            if (SkladBlanks != null)
+            {
+                var xElement = new XElement("SkladBlanks");
+
+                foreach (var skladBlank in SkladBlanks)
+                {
+                    xElement.Add(new XElement("SkladBlank",
+                    new XAttribute("Id", skladBlank.Id),
+                    new XElement("SkladId", skladBlank.SkladId),
+                    new XElement("BlankId", skladBlank.BlankId),
+                    new XElement("Count", skladBlank.Count)));
+                }
+
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(SkladBlankFileName);
+            }
         }
         private void SaveBlanks()
         {

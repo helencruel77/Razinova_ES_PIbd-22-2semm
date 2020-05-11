@@ -65,7 +65,8 @@ namespace LawFirmFileImplement.Implements
             .Select(rec => new OrderViewModel
             {
                 Id = rec.Id,
-                ProductName = GetProductName(rec.ProductId),
+                ProductName = source.Products.FirstOrDefault(x => x.Id == rec.ProductId)?.ProductName,
+                ProductId = rec.ProductId,
                 Count = rec.Count,
                 Sum = rec.Sum,
                 Status = rec.Status,

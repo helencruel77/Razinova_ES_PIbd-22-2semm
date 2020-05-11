@@ -13,5 +13,7 @@ namespace LawFirmBusinessLogics.Interfaces
         void CreateOrUpdate(SkladBindingModel model);
         void Delete(SkladBindingModel model);
         void FillUpSklad(SkladBlankBindingModel model);
+        void DeleteFromSklad(int productId, int count);
+        bool CheckAvailable(int productId, int count);
     }
 }

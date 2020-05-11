@@ -46,6 +46,11 @@ namespace LawFirmBusinessLogics.BusinessLogics
             if (order.Status != OrderStatus.Принят)
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
+
+            }
+            if (!skladLogic.CheckAvailable(order.ProductId, order.Count))
+            {
+                throw new Exception("На складах не хватает бланков");
             }
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
@@ -57,6 +62,7 @@ namespace LawFirmBusinessLogics.BusinessLogics
                 DateImplement = DateTime.Now,
                 Status = OrderStatus.Выполняется
             });
+            skladLogic.DeleteFromSklad(order.ProductId, order.Count);
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)
