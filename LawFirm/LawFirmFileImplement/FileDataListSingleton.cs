@@ -56,7 +56,7 @@ namespace LawFirmFileImplement
             if (File.Exists(BlankFileName))
             {
                 XDocument xDocument = XDocument.Load(BlankFileName);
-                var xElements = xDocument.Root.Elements("Component").ToList();
+                var xElements = xDocument.Root.Elements("Blank").ToList();
                 foreach (var elem in xElements)
                 {
                     list.Add(new Blank
@@ -177,7 +177,7 @@ namespace LawFirmFileImplement
         }
         private void SaveSklads()
         {
-            if (Sklads != null)
+            if (SkladBlanks != null)
             {
                 var xElement = new XElement("Sklads");
 
