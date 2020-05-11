@@ -16,5 +16,6 @@ namespace LawFirmDataBaseImplement.Models
         [Required]
         public string Password { set; get; }
         public List<Order> Orders { get; set; }
+        public List<MessageInfo> MessageInfoes { get; set; }
     }
 }
