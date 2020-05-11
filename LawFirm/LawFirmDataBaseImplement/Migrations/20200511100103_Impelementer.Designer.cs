@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LawFirmDataBaseImplement.Migrations
 {
     [DbContext(typeof(LawFirmDatabase))]
-    [Migration("20200511060802_Implementer")]
-    partial class Implementer
+    [Migration("20200511100103_Impelementer")]
+    partial class Impelementer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

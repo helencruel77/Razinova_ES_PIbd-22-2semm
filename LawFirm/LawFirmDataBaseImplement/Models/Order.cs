@@ -23,7 +23,7 @@ namespace LawFirmDataBaseImplement.Models
         public DateTime DateCreate { get; set; }
         public DateTime? DateImplement { get; set; }
         public Client Client { set; get; }
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
         public Implementer Implementer { get; set; }
 
     }

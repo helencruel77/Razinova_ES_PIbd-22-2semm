@@ -88,8 +88,7 @@ namespace LawFirmDataBaseImplement.Implements
                     Count = rec.Count,
                     Sum = rec.Sum,
                     ClientFIO = rec.Client.ClientFIO,
-                    ImplementerFIO = rec.ImplementerId.HasValue ?
-               rec.Implementer.ImplementerFIO : string.Empty,
+                    ImplementerFIO = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerFIO : string.Empty,
                     ProductName = rec.Product.ProductName
                 })
                .ToList();
