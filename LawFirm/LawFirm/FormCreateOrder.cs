@@ -111,6 +111,7 @@ namespace LawFirmView
                 logicM.CreateOrder(new CreateOrderBindingModel
                 {
                     ProductId = Convert.ToInt32(comboBoxProduct.SelectedValue),
+                    ClientId = (ComboBoxClient.SelectedItem as ClientViewModel).Id,
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text),
                     ClientId = (ComboBoxClient.SelectedItem as ClientViewModel).Id
