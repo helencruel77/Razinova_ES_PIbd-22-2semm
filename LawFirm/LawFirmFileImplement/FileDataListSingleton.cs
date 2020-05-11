@@ -177,7 +177,7 @@ namespace LawFirmFileImplement
         }
         private void SaveSklads()
         {
-            if (SkladBlanks != null)
+            if (Sklads != null)
             {
                 var xElement = new XElement("Sklads");
 
