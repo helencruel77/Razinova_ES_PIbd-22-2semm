@@ -111,9 +111,9 @@ namespace LawFirmView
                 logicM.CreateOrder(new CreateOrderBindingModel
                 {
                     ProductId = Convert.ToInt32(comboBoxProduct.SelectedValue),
+                    ClientId = (ComboBoxClient.SelectedItem as ClientViewModel).Id,
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text),
-                    ClientId = Convert.ToInt32(ComboBoxClient.SelectedValue)
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
