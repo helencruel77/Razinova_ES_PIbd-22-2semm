@@ -167,13 +167,13 @@ namespace LawFirmDataBaseImplement.Migrations
             modelBuilder.Entity("LawFirmDataBaseImplement.Models.Order", b =>
                 {
                     b.HasOne("LawFirmDataBaseImplement.Models.Client", "Client")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LawFirmDataBaseImplement.Models.Implementer", "Implementer")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("ImplementerId");
 
                     b.HasOne("LawFirmDataBaseImplement.Models.Product", "Product")

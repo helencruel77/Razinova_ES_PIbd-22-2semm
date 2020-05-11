@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LawFirmDataBaseImplement.Migrations
 {
     [DbContext(typeof(LawFirmDatabase))]
-    [Migration("20200510183547_Implementer")]
+    [Migration("20200511060802_Implementer")]
     partial class Implementer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -169,13 +169,13 @@ namespace LawFirmDataBaseImplement.Migrations
             modelBuilder.Entity("LawFirmDataBaseImplement.Models.Order", b =>
                 {
                     b.HasOne("LawFirmDataBaseImplement.Models.Client", "Client")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LawFirmDataBaseImplement.Models.Implementer", "Implementer")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("ImplementerId");
 
                     b.HasOne("LawFirmDataBaseImplement.Models.Product", "Product")
