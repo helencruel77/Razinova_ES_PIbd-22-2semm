@@ -114,7 +114,6 @@ namespace LawFirmView
                     ClientId = (ComboBoxClient.SelectedItem as ClientViewModel).Id,
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text),
-                    ClientId = (ComboBoxClient.SelectedItem as ClientViewModel).Id
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
