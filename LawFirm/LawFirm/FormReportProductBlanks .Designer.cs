@@ -72,7 +72,6 @@
             this.Controls.Add(this.reportViewer);
             this.Name = "FormReportProductBlanks";
             this.Text = "Бланки и пакеты документов";
-            this.Load += new System.EventHandler(this.FormReportProductBlanks_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ReportProductBlankViewModelBindingSource)).EndInit();
             this.ResumeLayout(false);
 
