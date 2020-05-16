@@ -124,7 +124,6 @@ namespace LawFirmFileImplement.Implements
 
         public bool CheckAvailable(int ProductId, int ProductsCount)
         {
-            bool result = true;
             var productBlanks = source.ProductBlanks
             .Where(x => x.ProductId == ProductId);
             if (productBlanks.Count() == 0)
@@ -137,7 +136,7 @@ namespace LawFirmFileImplement.Implements
                 if (count < elem.Count * ProductsCount)
                     return false;
             }
-            return result;
+            return true;
         }
 
         public void DeleteFromSklad(int ProductId, int ProductsCount)
