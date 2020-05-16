@@ -43,6 +43,7 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(564, 321);
             this.dataGridView.TabIndex = 0;
+            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
             // buttonRef
             // 
@@ -96,7 +97,7 @@
             this.Controls.Add(this.dataGridView);
             this.Name = "FormProducts";
             this.Text = "Продукты";
-            this.Load += new System.EventHandler(this.FormSnacks_Load);
+            this.Load += new System.EventHandler(this.FormBlanks_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

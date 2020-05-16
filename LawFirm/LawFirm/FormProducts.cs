@@ -24,7 +24,7 @@ namespace LawFirm
             InitializeComponent();
             this.logic = logic;
         }
-        private void FormSnacks_Load(object sender, EventArgs e)
+        private void FormBlanks_Load(object sender, EventArgs e)
         {
             LoadData();
         }
@@ -92,6 +92,11 @@ namespace LawFirm
         private void ButtonRef_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
