@@ -24,7 +24,7 @@ namespace LawFirm
             InitializeComponent();
             this.logic = logic;
         }
-        private void FormBlanks_Load(object sender, EventArgs e)
+        private void FormProducts_Load(object sender, EventArgs e)
         {
             LoadData();
         }
