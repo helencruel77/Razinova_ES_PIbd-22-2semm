@@ -65,19 +65,5 @@ namespace LawFirm
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void FormReportProductBlanks_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                var dataSource = logic.GetProductBlank();
-                ReportDataSource source = new ReportDataSource("DataSetProductBlank", dataSource);
-                reportViewer.LocalReport.DataSources.Add(source);
-                reportViewer.RefreshReport();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
     }
 }
