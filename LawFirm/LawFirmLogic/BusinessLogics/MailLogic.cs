@@ -24,7 +24,7 @@ namespace LawFirmLogic.BusinessLogics
             mailLogin = config.MailLogin;
             mailPassword = config.MailPassword;
         }
-        public static async void MailSendAsync(MailSendInfo info)
+        public static void MailSend(MailSendInfo info)
         {
             if (string.IsNullOrEmpty(smtpClientHost) || smtpClientPort == 0)
             {

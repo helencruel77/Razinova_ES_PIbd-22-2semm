@@ -54,7 +54,6 @@ namespace LawFirmClientView
         private void MessagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new FormMessages();
-
             form.ShowDialog();
         }
     }

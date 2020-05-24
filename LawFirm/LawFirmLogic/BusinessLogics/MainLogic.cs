@@ -29,7 +29,7 @@ namespace LawFirmLogic.BusinessLogics
                 DateCreate = DateTime.Now,
                 Status = OrderStatus.Принят
             });
-            MailLogic.MailSendAsync(new MailSendInfo
+            MailLogic.MailSend(new MailSendInfo
             {
                 MailAddress = clientLogic.Read(new ClientBindingModel
                 {
@@ -73,7 +73,7 @@ namespace LawFirmLogic.BusinessLogics
                     DateImplement = DateTime.Now,
                     Status = OrderStatus.Выполняется
                 });
-                MailLogic.MailSendAsync(new MailSendInfo
+                MailLogic.MailSend(new MailSendInfo
                 {
                     MailAddress = clientLogic.Read(new ClientBindingModel
                     {
@@ -111,7 +111,7 @@ namespace LawFirmLogic.BusinessLogics
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Готов
             });
-            MailLogic.MailSendAsync(new MailSendInfo
+            MailLogic.MailSend(new MailSendInfo
             {
                 MailAddress = clientLogic.Read(new ClientBindingModel
                 {
@@ -148,7 +148,7 @@ namespace LawFirmLogic.BusinessLogics
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Оплачен
             });
-            MailLogic.MailSendAsync(new MailSendInfo
+            MailLogic.MailSend(new MailSendInfo
             {
                 MailAddress = clientLogic.Read(new ClientBindingModel
                 {

@@ -11,50 +11,46 @@ namespace LawFirmDataBaseImplement.Implements
 {
     public class MessageInfoLogic : IMessageInfoLogic
     {
-       
-            public void Create(MessageInfoBindingModel model)
+        public void Create(MessageInfoBindingModel model)
+        {
+            using (var context = new LawFirmDatabase())
             {
-                using (var context = new LawFirmDatabase())
+                MessageInfo element = context.MessageInfoes.FirstOrDefault(rec =>
+               rec.Id == model.Id);
+                if (element != null)
                 {
-                    MessageInfo element = context.MessageInfoes.FirstOrDefault(rec => rec.Id == model.Id);
-
-                    if (element != null)
-                    {
-                        throw new Exception("Уже есть письмо с таким идентификатором");
-                    }
-
-                    int? clientId = context.Clients.FirstOrDefault(rec => rec.Email == model.FromMailAddress)?.Id;
-
-                    context.MessageInfoes.Add(new MessageInfo
-                    {
-                        Id = model.Id,
-                        ClientId = clientId,
-                        SenderName = model.FromMailAddress,
-                        DateDelivery = model.DateDelivery,
-                        Subject = model.Subject,
-                        Body = model.Body
-                    });
-
-                    context.SaveChanges();
+                    throw new Exception("Уже есть письмо с таким идентификатором");
                 }
+                int? clientId = context.Clients.FirstOrDefault(rec => rec.Email ==
+               model.FromMailAddress)?.Id;
+                context.MessageInfoes.Add(new MessageInfo
+                {
+                    Id = model.Id,
+                    ClientId = clientId,
+                    SenderName = model.FromMailAddress,
+                    DateDelivery = model.DateDelivery,
+                    Subject = model.Subject,
+                    Body = model.Body
+                });
+                context.SaveChanges();
             }
-
-            public List<MessageInfoViewModel> Read(MessageInfoBindingModel model)
+        }
+        public List<MessageInfoViewModel> Read(MessageInfoBindingModel model)
+        {
+            using (var context = new LawFirmDatabase())
             {
-                using (var context = new LawFirmDatabase())
+                return context.MessageInfoes
+                .Where(rec => model == null || rec.ClientId == model.ClientId)
+                .Select(rec => new MessageInfoViewModel
                 {
-                    return context.MessageInfoes
-                    .Where(rec => model == null || rec.ClientId == model.ClientId)
-                    .Select(rec => new MessageInfoViewModel
-                    {
-                        Id = rec.Id,
-                        SenderName = rec.SenderName,
-                        DateDelivery = rec.DateDelivery,
-                        Subject = rec.Subject,
-                        Body = rec.Body
-                    })
-                   .ToList();
-                }
+                    Id = rec.Id,
+                    SenderName = rec.SenderName,
+                    DateDelivery = rec.DateDelivery,
+                    Subject = rec.Subject,
+                    Body = rec.Body
+                })
+               .ToList();
             }
+        }
     }
 }
