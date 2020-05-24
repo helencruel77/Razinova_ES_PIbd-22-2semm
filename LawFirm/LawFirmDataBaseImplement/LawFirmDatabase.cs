@@ -1,4 +1,4 @@
-﻿using LawFirmFileImplement.Models;
+﻿using LawFirmDataBaseImplement.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,5 +20,7 @@ namespace LawFirmDataBaseImplement
         public virtual DbSet<Product> Products { set; get; }
         public virtual DbSet<ProductBlank> ProductBlanks { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
+        public virtual DbSet<Sklad> Sklads { set; get; }
+        public virtual DbSet<SkladBlank> SkladBlanks { set; get; }
     }
 }

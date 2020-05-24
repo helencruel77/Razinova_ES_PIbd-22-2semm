@@ -12,43 +12,10 @@ namespace LawFirmFileImplement.Implements
     public class SkladLogic : ISkladLogic
     {
         private readonly FileDataListSingleton source;
-
         public SkladLogic()
         {
             source = FileDataListSingleton.GetInstance();
         }
-
-        public void CreateOrUpdate(SkladBindingModel model)
-        {
-            Sklad element = source.Sklads.FirstOrDefault(s => s.SkladName == model.SkladName && s.Id != model.Id);
-            if (element != null)
-                throw new Exception("Уже есть бланк с таким названием");
-            if (model.Id.HasValue)
-            {
-                element = source.Sklads.FirstOrDefault(s => s.Id == model.Id);
-                if (element == null)
-                {
-                    throw new Exception("Элемент не найден");
-                }
-            }
-            else
-            {
-                int maxId = source.Sklads.Count > 0 ? source.Sklads.Max(s => s.Id) : 0;
-                element = new Sklad { Id = maxId + 1 };
-                source.Sklads.Add(element);
-            }
-            element.SkladName = model.SkladName;
-        }
-
-        public void Delete(SkladBindingModel model)
-        {
-            Sklad sklad = source.Sklads.FirstOrDefault(s => s.Id == model.Id);
-            if (sklad != null)
-                source.Sklads.Remove(sklad);
-            else
-                throw new Exception("Склад не найдено");
-        }
-
         public List<SkladViewModel> GetList()
         {
             return source.Sklads.Select(rec => new SkladViewModel
@@ -91,44 +58,88 @@ namespace LawFirmFileImplement.Implements
                 };
             }
         }
-
-        public void FillUpSklad(SkladBlankBindingModel model)
+        public void AddElement(SkladBindingModel model)
         {
-            if (source.SkladBlanks.Count == 0)
+
+            var elem = source.Sklads.FirstOrDefault(x => x.SkladName == model.SkladName);
+            if (elem != null)
             {
-                source.SkladBlanks.Add(new SkladBlank()
-                {
-                    Id = 1,
-                    BlankId = model.BlankId,
-                    SkladId = model.SkladId,
-                    Count = model.Count
-                });
+                throw new Exception("Уже есть склад с таким названием");
+            }
+            int maxId = source.Sklads.Count > 0 ? source.Sklads.Max(rec => rec.Id) : 0;
+            source.Sklads.Add(new Sklad
+            {
+                Id = maxId + 1,
+                SkladName = model.SkladName
+            });
+        }
+        public void UpdElement(SkladBindingModel model)
+        {
+            var elem = source.Sklads.FirstOrDefault(x =>
+                x.SkladName == model.SkladName && x.Id != model.Id);
+            if (elem != null)
+            {
+                throw new Exception("Уже есть склад с таким названием");
+            }
+            var elemToUpdate = source.Sklads.FirstOrDefault(x => x.Id == model.Id);
+            if (elemToUpdate != null)
+            {
+                elemToUpdate.SkladName = model.SkladName;
             }
             else
             {
-                var blank = source.SkladBlanks.FirstOrDefault(sm => sm.SkladId == model.SkladId && sm.BlankId == model.BlankId);
-                if (blank == null)
-                {
-                    source.SkladBlanks.Add(new SkladBlank()
-                    {
-                        Id = source.SkladBlanks.Max(sm => sm.Id) + 1,
-                        BlankId = model.BlankId,
-                        SkladId = model.SkladId,
-                        Count = model.Count
-                    });
-                }
-                else
-                    blank.Count += model.Count;
+                throw new Exception("Элемент не найден");
             }
         }
+        public void DelElement(int id)
+        {
+            var elem = source.Sklads.FirstOrDefault(x => x.Id == id);
+            if (elem != null)
+                source.Sklads.Remove(elem);
+            else
+                throw new Exception("Элемент не найден");
+        }
+        public void AddComponent(SkladBlankBindingModel model)
+        {
+            Sklad sklad = source.Sklads.FirstOrDefault(rec => rec.Id == model.SkladId);
 
+            if (sklad == null)
+            {
+                throw new Exception("Склад не найден");
+            }
+
+            Blank blank = source.Blanks.FirstOrDefault(rec => rec.Id == model.BlankId);
+
+            if (blank == null)
+            {
+                throw new Exception("Компонент не найден");
+            }
+
+            SkladBlank element = source.SkladBlanks
+                        .FirstOrDefault(rec => rec.SkladId == model.SkladId && rec.BlankId == model.BlankId);
+
+            if (element != null)
+            {
+                element.Count += model.Count;
+                return;
+            }
+
+            source.SkladBlanks.Add(new SkladBlank
+            {
+                Id = source.SkladBlanks.Count > 0 ? source.SkladBlanks.Max(rec => rec.Id) + 1 : 0,
+                SkladId = model.SkladId,
+                BlankId = model.BlankId,
+                Count = model.Count
+            });
+        }
         public bool CheckAvailable(int ProductId, int ProductsCount)
         {
-            var productBlanks = source.ProductBlanks
+            bool result = true;
+            var roductBlanks = source.ProductBlanks
             .Where(x => x.ProductId == ProductId);
-            if (productBlanks.Count() == 0)
+            if (roductBlanks.Count() == 0)
                 return false;
-            foreach (var elem in productBlanks)
+            foreach (var elem in roductBlanks)
             {
                 int count = 0;
                 var skladBlanks = source.SkladBlanks.FindAll(x => x.BlankId == elem.BlankId);
@@ -136,14 +147,14 @@ namespace LawFirmFileImplement.Implements
                 if (count < elem.Count * ProductsCount)
                     return false;
             }
-            return true;
+            return result;
         }
 
         public void DeleteFromSklad(int ProductId, int ProductsCount)
         {
-            var productBlanks = source.ProductBlanks.Where(x => x.ProductId == ProductId);
-            if (productBlanks.Count() == 0) return;
-            foreach (var elem in productBlanks)
+            var ProductBlanks = source.ProductBlanks.Where(x => x.ProductId == ProductId);
+            if (ProductBlanks.Count() == 0) return;
+            foreach (var elem in ProductBlanks)
             {
                 int left = elem.Count * ProductsCount;
                 var skladBlanks = source.SkladBlanks.FindAll(x => x.BlankId == elem.BlankId);

@@ -72,7 +72,7 @@ namespace LawFirmView
             }
             try
             {
-                mainlogic.FillUpSklad(new SkladBlankBindingModel
+                mainlogic.FillSklad(new SkladBlankBindingModel
                 {
                     Id = 0,
                     SkladId = Convert.ToInt32(comboBoxSklad.SelectedValue),

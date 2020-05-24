@@ -9,7 +9,6 @@ namespace LawFirmBusinessLogics.BusinessLogics
 {
     public class MainLogic
     {
-
         private readonly IOrderLogic orderLogic;
         private readonly ISkladLogic skladLogic;
         public MainLogic(IOrderLogic orderLogic, ISkladLogic skladLogic)
@@ -28,11 +27,6 @@ namespace LawFirmBusinessLogics.BusinessLogics
                 Status = OrderStatus.Принят
             });
         }
-
-        public void FillUpSklad (SkladBlankBindingModel model)
-        {
-            skladLogic.FillUpSklad(model);
-        }
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
             var order = orderLogic.Read(new OrderBindingModel
@@ -46,12 +40,8 @@ namespace LawFirmBusinessLogics.BusinessLogics
             if (order.Status != OrderStatus.Принят)
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
-
             }
-            if (!skladLogic.CheckAvailable(order.ProductId, order.Count))
-            {
-                throw new Exception("На складах не хватает бланков");
-            }
+            skladLogic.DeleteFromSklad(order.ProductId, order.Count);
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
@@ -59,12 +49,11 @@ namespace LawFirmBusinessLogics.BusinessLogics
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
+                DateImplement = null,
                 Status = OrderStatus.Выполняется
             });
-            skladLogic.DeleteFromSklad(order.ProductId, order.Count);
-        }
 
+        }
         public void FinishOrder(ChangeStatusBindingModel model)
         {
             var order = orderLogic.Read(new OrderBindingModel
@@ -86,7 +75,7 @@ namespace LawFirmBusinessLogics.BusinessLogics
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement,
+                DateImplement = DateTime.Now,
                 Status = OrderStatus.Готов
             });
         }
@@ -115,6 +104,9 @@ namespace LawFirmBusinessLogics.BusinessLogics
                 Status = OrderStatus.Оплачен
             });
         }
-
+        public void FillSklad(SkladBlankBindingModel model)
+        {
+            skladLogic.AddComponent(model);
+        }
     }
 }

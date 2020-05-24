@@ -75,12 +75,15 @@ namespace LawFirmView
                 }
                 try
                 {
-                    logic.CreateOrUpdate(new SkladBindingModel
-                    {
-                        Id = id,
-                        SkladName = textBoxName.Text
-                    });
-                    MessageBox.Show("Сохранение прошло успешно", "Сообщение",
+                if (id.HasValue)
+                {
+                    logic.UpdElement(new SkladBindingModel { Id = id.Value, SkladName = textBoxName.Text });
+                }
+                else
+                {
+                    logic.AddElement(new SkladBindingModel { SkladName = textBoxName.Text });
+                }
+                MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DialogResult = DialogResult.OK;
                     Close();

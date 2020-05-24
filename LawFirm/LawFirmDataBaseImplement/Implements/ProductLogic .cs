@@ -2,7 +2,7 @@
 using LawFirmBusinessLogics.Interfaces;
 using LawFirmBusinessLogics.ViewModels;
 using LawFirmDataBaseImplement;
-using LawFirmFileImplement.Models;
+using LawFirmDataBaseImplement.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
