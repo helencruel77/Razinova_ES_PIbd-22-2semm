@@ -43,6 +43,7 @@
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.buttonPayOrder = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
+            this.buttonMessages = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -174,11 +175,22 @@
             this.buttonRef.UseVisualStyleBackColor = true;
             this.buttonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
+            // buttonMessages
+            // 
+            this.buttonMessages.Location = new System.Drawing.Point(922, 210);
+            this.buttonMessages.Name = "buttonMessages";
+            this.buttonMessages.Size = new System.Drawing.Size(123, 23);
+            this.buttonMessages.TabIndex = 7;
+            this.buttonMessages.Text = "Сообщения";
+            this.buttonMessages.UseVisualStyleBackColor = true;
+            this.buttonMessages.Click += new System.EventHandler(this.buttonMessages_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 450);
+            this.Controls.Add(this.buttonMessages);
             this.Controls.Add(this.buttonRef);
             this.Controls.Add(this.buttonPayOrder);
             this.Controls.Add(this.buttonCreateOrder);
@@ -213,5 +225,6 @@
         private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem исполнителиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem запускРаботToolStripMenuItem;
+        private System.Windows.Forms.Button buttonMessages;
     }
 }
