@@ -37,6 +37,7 @@
             this.RefreshOrderListToolStripMenuItem = new
            System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
+            this.MessagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +46,8 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
  this.UpdateDataToolStripMenuItem,
  this.CreateOrderToolStripMenuItem,
- this.RefreshOrderListToolStripMenuItem});
+ this.RefreshOrderListToolStripMenuItem,
+ this.MessagesToolStripMenuItem });
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(621, 24);
@@ -77,6 +79,13 @@
             this.RefreshOrderListToolStripMenuItem.Text = "Обновить список заказов";
             this.RefreshOrderListToolStripMenuItem.Click += new
            System.EventHandler(this.RefreshOrderListToolStripMenuItem_Click);
+            // 
+            // MessagesToolStripMenuItem
+            // 
+            this.MessagesToolStripMenuItem.Name = "MessagesToolStripMenuItem";
+            this.MessagesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.MessagesToolStripMenuItem.Text = "Сообщения";
+            this.MessagesToolStripMenuItem.Click += new System.EventHandler(this.MessagesToolStripMenuItem_Click);
             //
             // dataGridView
             //
@@ -113,5 +122,6 @@
         private System.Windows.Forms.ToolStripMenuItem CreateOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RefreshOrderListToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.ToolStripMenuItem MessagesToolStripMenuItem;
     }
 }
