@@ -120,9 +120,9 @@ namespace LawFirmDataBaseImplement.Implements
                 {
                     throw new Exception("Уже есть склад с таким названием");
                 }
-                var warehouse = new Sklad();
-                context.Sklads.Add(warehouse);
-                warehouse.SkladName = model.SkladName;
+                var sklad = new Sklad();
+                context.Sklads.Add(sklad);
+                sklad.SkladName = model.SkladName;
                 context.SaveChanges();
             }
         }

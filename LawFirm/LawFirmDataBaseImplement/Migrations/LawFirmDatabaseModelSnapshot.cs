@@ -15,100 +15,100 @@ namespace LawFirmDataBaseImplement.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.2")
+                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("LawFirmFileImplement.Models.Blank", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BlankName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("BlankName")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Blanks");
-                });
+                b.ToTable("Blanks");
+            });
 
             modelBuilder.Entity("LawFirmFileImplement.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
+                b.Property<int>("Count")
+                    .HasColumnType("int");
 
-                    b.Property<DateTime>("DateCreate")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("DateCreate")
+                    .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateImplement")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime?>("DateImplement")
+                    .HasColumnType("datetime2");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                b.Property<int>("ProductId")
+                    .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                b.Property<int>("Status")
+                    .HasColumnType("int");
 
-                    b.Property<decimal>("Sum")
-                        .HasColumnType("decimal(18,2)");
+                b.Property<decimal>("Sum")
+                    .HasColumnType("decimal(18,2)");
 
-                    b.HasIndex("ProductId");
+                b.HasIndex("ProductId");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Orders");
-                });
+                b.ToTable("Orders");
+            });
 
             modelBuilder.Entity("LawFirmFileImplement.Models.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                b.Property<decimal>("Price")
+                    .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ProductName")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ProductName")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Products");
-                });
+                b.ToTable("Products");
+            });
 
             modelBuilder.Entity("LawFirmFileImplement.Models.ProductBlank", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BlankId")
-                        .HasColumnType("int");
+                b.Property<int>("BlankId")
+                    .HasColumnType("int");
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
+                b.Property<int>("Count")
+                    .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                b.Property<int>("ProductId")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("BlankId");
+                b.HasIndex("BlankId");
 
-                    b.HasIndex("ProductId");
+                b.HasIndex("ProductId");
 
-                    b.ToTable("ProductBlanks");
-                });
+                b.ToTable("ProductBlanks");
+            });
 
             modelBuilder.Entity("LawFirmFileImplement.Models.Order", b =>
             {
@@ -118,21 +118,75 @@ namespace LawFirmDataBaseImplement.Migrations
                     .OnDelete(DeleteBehavior.Cascade)
                     .IsRequired();
             });
+            modelBuilder.Entity("LawFirmFileImplement.Models.Sklad", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                b.Property<string>("SkladName")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("Id");
+
+                b.ToTable("Sklads");
+            });
+
+            modelBuilder.Entity("LawFirmFileImplement.Models.SkladBlank", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                b.Property<int>("Count")
+                    .HasColumnType("int");
+
+                b.Property<int>("BlankId")
+                    .HasColumnType("int");
+
+                b.Property<int>("SkladId")
+                    .HasColumnType("int");
+
+                b.HasKey("Id");
+
+                b.HasIndex("BlankId");
+
+                b.HasIndex("SkladId");
+
+                b.ToTable("SkladBlanks");
+            });
 
             modelBuilder.Entity("LawFirmFileImplement.Models.ProductBlank", b =>
-                {
-                    b.HasOne("LawFirmFileImplement.Models.Blank", "Blank")
-                        .WithMany("ProductBlanks")
-                        .HasForeignKey("BlankId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("LawFirmFileImplement.Models.Blank", "Blank")
+                    .WithMany("ProductBlanks")
+                    .HasForeignKey("BlankId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("LawFirmFileImplement.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                b.HasOne("LawFirmFileImplement.Models.Product", "Product")
+                    .WithMany()
+                    .HasForeignKey("ProductId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
+            modelBuilder.Entity("LawFirmFileImplement.Models.SkladBlank", b =>
+            {
+                b.HasOne("LawFirmFileImplement.Models.Blank", "Blank")
+                    .WithMany("SkladBlanks")
+                    .HasForeignKey("BlankId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.HasOne("LawFirmFileImplement.Models.Sklad", "Sklad")
+                    .WithMany("SkladBlanks")
+                    .HasForeignKey("SkladId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 #pragma warning restore 612, 618
         }
     }
