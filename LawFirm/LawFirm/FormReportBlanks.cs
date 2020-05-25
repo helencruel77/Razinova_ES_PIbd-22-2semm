@@ -14,19 +14,35 @@ using Unity;
 
 namespace LawFirm
 {
-    public partial class FormReportProductBlanks : Form
+    public partial class FormReportBlanks : Form
     {
-
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
         private readonly ReportLogic logic;
 
-        public FormReportProductBlanks(ReportLogic logic)
+        public FormReportBlanks(ReportLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
         }
+
+        private void reportViewer_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                var dataSource = logic.GetSkladBlanks();
+                ReportDataSource source = new ReportDataSource("DataSetBlanks", dataSource);
+                reportViewer.LocalReport.DataSources.Clear();
+                reportViewer.LocalReport.DataSources.Add(source);
+                reportViewer.RefreshReport();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
         private void ButtonToPdf_Click(object sender, EventArgs e)
         {
@@ -36,7 +52,7 @@ namespace LawFirm
                 {
                     try
                     {
-                        logic.SaveProductBlanksToPdfFile(new ReportBindingModel
+                        logic.SaveBlanksToPdfFile(new ReportBindingModel
                         {
                             FileName = dialog.FileName,
                         });
@@ -49,26 +65,6 @@ namespace LawFirm
                     }
                 }
             }
-        }
-
-        private void reportViewer_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                var dataSource = logic.GetProductBlank();
-                ReportDataSource source = new ReportDataSource("DataSetProductBlank", dataSource);
-                reportViewer.LocalReport.DataSources.Add(source);
-                reportViewer.RefreshReport();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void FormReportProductBlanks_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

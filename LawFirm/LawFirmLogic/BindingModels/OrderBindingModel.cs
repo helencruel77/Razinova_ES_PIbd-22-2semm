@@ -1,9 +1,10 @@
-﻿using LawFirmLogic.Enums;
+﻿
+using LawFirmBusinessLogics.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LawFirmLogic.BindingModels
+namespace LawFirmBusinessLogics.BindingModels
 {
     public class OrderBindingModel
     {

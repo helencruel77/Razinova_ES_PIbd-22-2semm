@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Text;
 
 namespace LawFirmBusinessLogics.ViewModels
 {
-    public class BlankViewModel
+    public class ReportSkladBlankViewModel
     {
-        public int Id { get; set; }
+        public string SkladName { get; set; }
 
-        [DisplayName("Название бланка")]
         public string BlankName { get; set; }
+
+        public int Count { get; set; }
     }
 }

@@ -1,11 +1,12 @@
-﻿using LawFirmLogic.BindingModels;
-using LawFirmLogic.Interfaces;
-using LawFirmLogic.ViewModels;
+﻿
 using LawFirmFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using LawFirmBusinessLogics.Interfaces;
+using LawFirmBusinessLogics.BindingModels;
+using LawFirmBusinessLogics.ViewModels;
 
 namespace LawFirmFileImplement.Implements
 {

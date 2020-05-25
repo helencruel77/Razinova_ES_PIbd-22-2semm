@@ -1,8 +1,9 @@
-﻿using LawFirmLogic.Enums;
+﻿
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Text;
+using LawFirmBusinessLogics.Enums;
 
 namespace LawFirmFileImplement.Models
 {
