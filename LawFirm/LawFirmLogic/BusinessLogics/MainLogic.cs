@@ -41,17 +41,24 @@ namespace LawFirmBusinessLogics.BusinessLogics
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
-            skladLogic.DeleteFromSklad(order.ProductId, order.Count);
-            orderLogic.CreateOrUpdate(new OrderBindingModel
+            try
             {
-                Id = order.Id,
-                ProductId = order.ProductId,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = null,
-                Status = OrderStatus.Выполняется
-            });
+                skladLogic.DeleteFromSklad(order.ProductId, order.Count);
+                orderLogic.CreateOrUpdate(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    ProductId = order.ProductId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    DateImplement = DateTime.Now,
+                    Status = OrderStatus.Выполняется
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
         }
         public void FinishOrder(ChangeStatusBindingModel model)

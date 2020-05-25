@@ -129,7 +129,6 @@ namespace LawFirmDataBaseImplement.Implements
                    ProductName = rec.ProductName,
                    Price = rec.Price,
                    ProductBlanks = context.ProductBlanks
-                .Include(recPC => recPC.Blank)
                .Where(recPC => recPC.ProductId == rec.Id)
                .ToDictionary(recPC => recPC.BlankId, recPC =>
                 (recPC.Blank?.BlankName, recPC.Count))
