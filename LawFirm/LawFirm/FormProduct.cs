@@ -35,8 +35,9 @@ namespace LawFirmView
                 {
                     ProductViewModel view = logic.Read(new ProductBindingModel
                     {
-                        Id = id.Value })?[0];
-                    if (view == null)
+                        Id = id.Value
+                    })?[0];
+                    if (view != null)
                     {
                         textBoxName.Text = view.ProductName;
                         textBoxPrice.Text = view.Price.ToString();
@@ -64,76 +65,15 @@ namespace LawFirmView
                     dataGridViewProduct.Rows.Clear();
                     foreach (var pc in productBlanks)
                     {
-                        dataGridViewProduct.Rows.Add(new object[] { pc.Key, pc.Value.Item1,
-                        pc.Value.Item2 });
+                        dataGridViewProduct.Rows.Add(new object[] { pc.Key, pc.Value.Item1, pc.Value.Item2 });
                     }
                 }
-                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-MessageBoxIcon.Error);
+   MessageBoxIcon.Error);
             }
-        }
-        private void ButtonAdd_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormProductBlank>();
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                if (productBlanks.ContainsKey(form.Id))
-                {
-                    productBlanks[form.Id] = (form.BlankName, form.Count);
-                }
-                else
-                {
-                    productBlanks.Add(form.Id, (form.BlankName, form.Count));
-                }
-                LoadData();
-            }
-
-        }
-        private void ButtonUpd_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewProduct.SelectedRows.Count == 1)
-            {
-                var form = Container.Resolve<FormProductBlank>();
-                int id = Convert.ToInt32(dataGridViewProduct.SelectedRows[0].Cells[0].Value);
-                form.Id = id;
-                form.Count = productBlanks[id].Item2;
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    productBlanks[form.Id] = (form.BlankName, form.Count);
-                    LoadData();
-                }
-            }
-
-        }
-        private void ButtonDel_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewProduct.SelectedRows.Count == 1)
-            {
-                if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo,
-               MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    try
-                    {
-
-                        productBlanks.Remove(Convert.ToInt32(dataGridViewProduct.SelectedRows[0].Cells[0].Value));
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                       MessageBoxIcon.Error);
-                    }
-                    LoadData();
-                }
-            }
-
-        }
-        private void ButtonRef_Click(object sender, EventArgs e)
-        {
-            LoadData();
         }
         private void ButtonSave_Click(object sender, EventArgs e)
         {
@@ -151,7 +91,7 @@ MessageBoxIcon.Error);
             }
             if (productBlanks == null || productBlanks.Count == 0)
             {
-                MessageBox.Show("Заполните бланки", "Ошибка", MessageBoxButtons.OK,
+                MessageBox.Show("Заполните компоненты", "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
                 return;
             }
@@ -180,6 +120,66 @@ MessageBoxIcon.Error);
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void ButtonRef_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void ButtonDel_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewProduct.SelectedRows.Count == 1)
+            {
+                if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo,
+               MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    try
+                    {
+
+                        productBlanks.Remove(Convert.ToInt32(dataGridViewProduct.SelectedRows[0].Cells[0].Value));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                       MessageBoxIcon.Error);
+                    }
+                    LoadData();
+                }
+            }
+        }
+
+        private void ButtonUpd_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewProduct.SelectedRows.Count == 1)
+            {
+                var form = Container.Resolve<FormProductBlank>();
+                int id = Convert.ToInt32(dataGridViewProduct.SelectedRows[0].Cells[0].Value);
+                form.Id = id;
+                form.Count = productBlanks[id].Item2;
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    productBlanks[form.Id] = (form.BlankName, form.Count);
+                    LoadData();
+                }
+            }
+        }
+
+        private void ButtonAdd_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormProductBlank>();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                if (productBlanks.ContainsKey(form.Id))
+                {
+                    productBlanks[form.Id] = (form.BlankName, form.Count);
+                }
+                else
+                {
+                    productBlanks.Add(form.Id, (form.BlankName, form.Count));
+                }
+                LoadData();
+            }
         }
     }
 }

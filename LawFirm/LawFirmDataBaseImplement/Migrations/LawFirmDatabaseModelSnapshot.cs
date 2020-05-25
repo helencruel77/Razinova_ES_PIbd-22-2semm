@@ -15,181 +15,182 @@ namespace LawFirmDataBaseImplement.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3")
+                .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("LawFirmDataBaseImplement.Models.Blank", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            modelBuilder.Entity("ConcreteGoodsPlantDatabaseImplement.Models.Blank", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BlankName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("BlankName")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Blanks");
-                });
+                b.ToTable("Blanks");
+            });
 
-            modelBuilder.Entity("LawFirmDataBaseImplement.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            modelBuilder.Entity("ConcreteGoodsPlantDatabaseImplement.Models.Order", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
+                b.Property<int>("Count")
+                    .HasColumnType("int");
 
-                    b.Property<DateTime>("DateCreate")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("DateCreate")
+                    .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateImplement")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime?>("DateImplement")
+                    .HasColumnType("datetime2");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                b.Property<int>("ProductId")
+                    .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                b.Property<int>("Status")
+                    .HasColumnType("int");
 
-                    b.Property<decimal>("Sum")
-                        .HasColumnType("decimal(18,2)");
+                b.Property<decimal>("Sum")
+                    .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                b.HasIndex("ProductId");
 
-                    b.ToTable("Orders");
-                });
+                b.ToTable("Orders");
+            });
 
-            modelBuilder.Entity("LawFirmDataBaseImplement.Models.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            modelBuilder.Entity("ConcreteGoodsPlantDatabaseImplement.Models.Product", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                b.Property<decimal>("Price")
+                    .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ProductName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ProductName")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Products");
-                });
+                b.ToTable("Products");
+            });
 
-            modelBuilder.Entity("LawFirmDataBaseImplement.Models.ProductBlank", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            modelBuilder.Entity("ConcreteGoodsPlantDatabaseImplement.Models.ProductBlank", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BlankId")
-                        .HasColumnType("int");
+                b.Property<int>("BlankId")
+                    .HasColumnType("int");
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
+                b.Property<int>("Count")
+                    .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                b.Property<int>("ProductId")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("BlankId");
+                b.HasIndex("BlankId");
 
-                    b.ToTable("ProductBlanks");
-                });
+                b.HasIndex("ProductId");
 
-            modelBuilder.Entity("LawFirmDataBaseImplement.Models.Sklad", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                b.ToTable("ProductBlanks");
+            });
 
-                    b.Property<string>("SkladName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+            modelBuilder.Entity("ConcreteGoodsPlantDatabaseImplement.Models.Sklad", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasKey("Id");
+                b.Property<string>("SkladName")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Sklads");
-                });
+                b.HasKey("Id");
 
-            modelBuilder.Entity("LawFirmDataBaseImplement.Models.SkladBlank", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                b.ToTable("Sklads");
+            });
 
-                    b.Property<int>("BlankId")
-                        .HasColumnType("int");
+            modelBuilder.Entity("ConcreteGoodsPlantDatabaseImplement.Models.SkladBlank", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ComponentId")
-                        .HasColumnType("int");
+                b.Property<int>("BlankId")
+                    .HasColumnType("int");
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
+                b.Property<int>("Count")
+                    .HasColumnType("int");
 
-                    b.Property<int>("SkladId")
-                        .HasColumnType("int");
+                b.Property<int>("SkladId")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ComponentId");
+                b.HasIndex("BlankId");
 
-                    b.HasIndex("SkladId")
-                        .IsUnique();
+                b.HasIndex("SkladId")
+                    .IsUnique();
 
-                    b.ToTable("SkladBlanks");
-                });
+                b.ToTable("SkladBlank");
+            });
 
-            modelBuilder.Entity("LawFirmDataBaseImplement.Models.Order", b =>
-                {
-                    b.HasOne("LawFirmDataBaseImplement.Models.Product", "Product")
-                        .WithMany("Orders")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+            modelBuilder.Entity("ConcreteGoodsPlantDatabaseImplement.Models.Order", b =>
+            {
+                b.HasOne("ConcreteGoodsPlantDatabaseImplement.Models.Product", "Product")
+                    .WithMany("Orders")
+                    .HasForeignKey("ProductId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
-            modelBuilder.Entity("LawFirmDataBaseImplement.Models.ProductBlank", b =>
-                {
-                    b.HasOne("LawFirmDataBaseImplement.Models.Blank", "Blank")
-                        .WithMany("ProductBlanks")
-                        .HasForeignKey("BlankId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("ConcreteGoodsPlantDatabaseImplement.Models.ProductBlank", b =>
+            {
+                b.HasOne("ConcreteGoodsPlantDatabaseImplement.Models.Blank", "Blank")
+                    .WithMany("ProductBlanks")
+                    .HasForeignKey("BlankId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("LawFirmDataBaseImplement.Models.Product", "Product")
-                        .WithMany("ProductBlanks")
-                        .HasForeignKey("BlankId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                b.HasOne("ConcreteGoodsPlantDatabaseImplement.Models.Product", "Product")
+                    .WithMany("ProductBlanks")
+                    .HasForeignKey("ProductId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
-            modelBuilder.Entity("LawFirmDataBaseImplement.Models.SkladBlank", b =>
-                {
-                    b.HasOne("LawFirmDataBaseImplement.Models.Blank", "Blank")
-                        .WithMany("SkladBlanks")
-                        .HasForeignKey("ComponentId");
+            modelBuilder.Entity("ConcreteGoodsPlantDatabaseImplement.Models.SkladBlank", b =>
+            {
+                b.HasOne("ConcreteGoodsPlantDatabaseImplement.Models.Blank", "Blank")
+                    .WithMany("SkladBlanks")
+                    .HasForeignKey("BlankId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("LawFirmDataBaseImplement.Models.Sklad", "Sklad")
-                        .WithOne("SkladBlank")
-                        .HasForeignKey("LawFirmDataBaseImplement.Models.SkladBlank", "SkladId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                b.HasOne("ConcreteGoodsPlantDatabaseImplement.Models.Sklad", "Sklad")
+                    .WithOne("SkladBlank")
+                    .HasForeignKey("ConcreteGoodsPlantDatabaseImplement.Models.SkladBlank", "SkladId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 #pragma warning restore 612, 618
         }
     }
