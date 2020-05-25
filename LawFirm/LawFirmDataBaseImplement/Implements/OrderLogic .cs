@@ -1,6 +1,6 @@
-﻿using LawFirmLogic.BindingModels;
-using LawFirmLogic.Interfaces;
-using LawFirmLogic.ViewModels;
+﻿using LawFirmBusinessLogics.BindingModels;
+using LawFirmBusinessLogics.Interfaces;
+using LawFirmBusinessLogics.ViewModels;
 using LawFirmDataBaseImplement.Models;
 using Microsoft.EntityFrameworkCore;
 using System;

@@ -1,8 +1,7 @@
-﻿using LawFirmLogic.BindingModels;
-using LawFirmLogic.Interfaces;
-using LawFirmView;
-using System;
+﻿using LawFirmBusinessLogics.BindingModels;
 using System.Collections.Generic;
+using LawFirmBusinessLogics.Interfaces;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -12,33 +11,34 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
-namespace LawFirm
+namespace LawFirmView
 {
-    public partial class FormProducts : Form
+    public partial class FormSklads : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
-        private readonly IProductLogic logic;
-        public FormProducts(IProductLogic logic)
+        private readonly ISkladLogic logic;
+
+        public FormSklads(ISkladLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
         }
-        private void FormProducts_Load(object sender, EventArgs e)
+        private void FormSklads_Load(object sender, EventArgs e)
         {
             LoadData();
         }
+
         private void LoadData()
         {
             try
             {
-                var list = logic.Read(null);
+                var list = logic.GetList();
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridView.Columns[3].Visible = false;
                 }
             }
             catch (Exception ex)
@@ -47,19 +47,21 @@ namespace LawFirm
                MessageBoxIcon.Error);
             }
         }
-        private void ButtonAdd_Click(object sender, EventArgs e)
+
+        private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormProduct>();
+            var form = Container.Resolve<FormSklad>();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
             }
         }
-        private void ButtonUpd_Click(object sender, EventArgs e)
+
+        private void buttonUpd_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<FormProduct>();
+                var form = Container.Resolve<FormSklad>();
                 form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -67,17 +69,19 @@ namespace LawFirm
                 }
             }
         }
-        private void ButtonDel_Click(object sender, EventArgs e)
+
+        private void buttonDel_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
                 if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo,
                MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                    int id =
+                   Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        logic.Delete(new ProductBindingModel { Id = id });
+                        logic.DelElement(id);
                     }
                     catch (Exception ex)
                     {
@@ -88,7 +92,8 @@ namespace LawFirm
                 }
             }
         }
-        private void ButtonRef_Click(object sender, EventArgs e)
+
+        private void buttonRef_Click(object sender, EventArgs e)
         {
             LoadData();
         }

@@ -12,7 +12,7 @@ namespace LawFirmDataBaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-1L0DP37\SQLEXPRESS;Initial Catalog=LawFirmDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-1L0DP37\SQLEXPRESS;Initial Catalog=LawFirmDatabaseHomeWork;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -20,5 +20,7 @@ namespace LawFirmDataBaseImplement
         public virtual DbSet<Product> Products { set; get; }
         public virtual DbSet<ProductBlank> ProductBlanks { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
+        public virtual DbSet<Sklad> Sklads { set; get; }
+        public virtual DbSet<SkladBlank> SkladBlanks { set; get; }
     }
 }

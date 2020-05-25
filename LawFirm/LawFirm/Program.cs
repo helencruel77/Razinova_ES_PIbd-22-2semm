@@ -26,9 +26,11 @@ namespace LawFirmView
         {
             var currentContainer = new UnityContainer();
             currentContainer.RegisterType<IBlankLogic, BlankLogic>(new
-           HierarchicalLifetimeManager());
+HierarchicalLifetimeManager());
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new
            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ISkladLogic, SkladLogic>(new
+          HierarchicalLifetimeManager());
             currentContainer.RegisterType<IProductLogic, ProductLogic>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());

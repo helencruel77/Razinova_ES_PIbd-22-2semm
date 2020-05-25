@@ -9,11 +9,12 @@ namespace LawFirmLogic.BusinessLogics
 {
     public class MainLogic
     {
-
         private readonly IOrderLogic orderLogic;
-        public MainLogic(IOrderLogic orderLogic)
+        private readonly ISkladLogic skladLogic;
+        public MainLogic(IOrderLogic orderLogic, ISkladLogic skladLogic)
         {
             this.orderLogic = orderLogic;
+            this.skladLogic = skladLogic;
         }
         public void CreateOrder(CreateOrderBindingModel model)
         {
@@ -40,6 +41,7 @@ namespace LawFirmLogic.BusinessLogics
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
+            skladLogic.DeleteFromSklad(order.ProductId, order.Count);
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
@@ -47,11 +49,11 @@ namespace LawFirmLogic.BusinessLogics
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
+                DateImplement = null,
                 Status = OrderStatus.Выполняется
             });
-        }
 
+        }
         public void FinishOrder(ChangeStatusBindingModel model)
         {
             var order = orderLogic.Read(new OrderBindingModel
@@ -73,7 +75,7 @@ namespace LawFirmLogic.BusinessLogics
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement,
+                DateImplement = DateTime.Now,
                 Status = OrderStatus.Готов
             });
         }
@@ -102,6 +104,9 @@ namespace LawFirmLogic.BusinessLogics
                 Status = OrderStatus.Оплачен
             });
         }
-
+        public void FillSklad(SkladBlankBindingModel model)
+        {
+            skladLogic.AddComponent(model);
+        }
     }
 }
