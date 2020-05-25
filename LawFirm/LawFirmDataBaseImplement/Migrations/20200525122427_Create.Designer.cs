@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LawFirmDataBaseImplement.Migrations
 {
     [DbContext(typeof(LawFirmDatabase))]
-    [Migration("20200525063916_Sklad")]
-    partial class Sklad
+    [Migration("20200525122427_Create")]
+    partial class Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -137,6 +137,9 @@ namespace LawFirmDataBaseImplement.Migrations
                     b.Property<int>("BlankId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ComponentId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
@@ -145,7 +148,7 @@ namespace LawFirmDataBaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BlankId");
+                    b.HasIndex("ComponentId");
 
                     b.HasIndex("SkladId")
                         .IsUnique();
@@ -181,9 +184,7 @@ namespace LawFirmDataBaseImplement.Migrations
                 {
                     b.HasOne("LawFirmDataBaseImplement.Models.Blank", "Blank")
                         .WithMany("SkladBlanks")
-                        .HasForeignKey("BlankId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ComponentId");
 
                     b.HasOne("LawFirmDataBaseImplement.Models.Sklad", "Sklad")
                         .WithOne("SkladBlank")
