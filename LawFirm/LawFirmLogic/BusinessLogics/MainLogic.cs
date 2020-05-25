@@ -1,4 +1,6 @@
-﻿using LawFirmLogic.BindingModels;
+﻿using LawFirmBusinessLogics.BindingModels;
+using LawFirmBusinessLogics.Interfaces;
+using LawFirmLogic.BindingModels;
 using LawFirmLogic.Enums;
 using LawFirmLogic.Interfaces;
 using System;
