@@ -2,7 +2,7 @@
 
 namespace LawFirmDataBaseImplement.Migrations
 {
-    public partial class Implementer : Migration
+    public partial class Client : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

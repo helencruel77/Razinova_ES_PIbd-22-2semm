@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LawFirmDataBaseImplement.Migrations
 {
     [DbContext(typeof(LawFirmDatabase))]
-    [Migration("20200510093029_Client")]
-    partial class Client
+    [Migration("20200511100103_Impelementer")]
+    partial class Impelementer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,6 +61,27 @@ namespace LawFirmDataBaseImplement.Migrations
                     b.ToTable("Clients");
                 });
 
+            modelBuilder.Entity("LawFirmDataBaseImplement.Models.Implementer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImplementerFIO")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PauseTime")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkingTime")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Implementers");
+                });
+
             modelBuilder.Entity("LawFirmDataBaseImplement.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -80,6 +101,9 @@ namespace LawFirmDataBaseImplement.Migrations
                     b.Property<DateTime?>("DateImplement")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ImplementerId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -92,6 +116,8 @@ namespace LawFirmDataBaseImplement.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("ImplementerId");
 
                     b.HasIndex("ProductId");
 
@@ -143,10 +169,14 @@ namespace LawFirmDataBaseImplement.Migrations
             modelBuilder.Entity("LawFirmDataBaseImplement.Models.Order", b =>
                 {
                     b.HasOne("LawFirmDataBaseImplement.Models.Client", "Client")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("LawFirmDataBaseImplement.Models.Implementer", "Implementer")
+                        .WithMany("Orders")
+                        .HasForeignKey("ImplementerId");
 
                     b.HasOne("LawFirmDataBaseImplement.Models.Product", "Product")
                         .WithMany("Orders")

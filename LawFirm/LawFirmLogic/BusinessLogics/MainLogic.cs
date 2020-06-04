@@ -103,6 +103,7 @@ namespace LawFirmLogic.BusinessLogics
             {
                 Id = order.Id,
                 ClientId = order.ClientId,
+                ClientFIO = order.ClientFIO,
                 ImplementerId = order.ImplementerId,
                 ProductId = order.ProductId,
                 Count = order.Count,
