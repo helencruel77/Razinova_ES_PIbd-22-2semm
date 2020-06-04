@@ -35,8 +35,9 @@ namespace LawFirmView
                 {
                     ProductViewModel view = logic.Read(new ProductBindingModel
                     {
-                        Id = id.Value })?[0];
-                    if (view == null)
+                        Id = id.Value
+                    })?[0];
+                    if (view != null)
                     {
                         textBoxName.Text = view.ProductName;
                         textBoxPrice.Text = view.Price.ToString();
@@ -60,7 +61,6 @@ namespace LawFirmView
             try
             {
                 Program.ConfigGrid(logic.Read(null), dataGridViewProduct);
-
             }
             catch (Exception ex)
             {
