@@ -9,6 +9,5 @@ namespace LawFirmLogic.ViewModels
         public string BlankName { get; set; }
         public string ProductName { get; set; }
         public int TotalCount { get; set; }
-        public List<Tuple<string, int>> Products { get; set; }
     }
 }

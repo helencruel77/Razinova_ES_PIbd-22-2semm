@@ -59,16 +59,8 @@ namespace LawFirmView
         {
             try
             {
-                if (productBlanks != null)
-                {
-                    dataGridViewProduct.Rows.Clear();
-                    foreach (var pc in productBlanks)
-                    {
-                        dataGridViewProduct.Rows.Add(new object[] { pc.Key, pc.Value.Item1,
-                        pc.Value.Item2 });
-                    }
-                }
-                
+                Program.ConfigGrid(logic.Read(null), dataGridViewProduct);
+
             }
             catch (Exception ex)
             {

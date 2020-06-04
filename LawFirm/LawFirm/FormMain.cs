@@ -23,13 +23,16 @@ namespace LawFirmView
         private readonly IOrderLogic orderLogic;
         private readonly ReportLogic report;
         private readonly WorkModeling work;
-        public FormMain(WorkModeling work, MainLogic logic, IOrderLogic orderLogic, ReportLogic report)
+        private readonly BackUpAbstractLogic backUpAbstractLogic;
+        public FormMain(WorkModeling work, MainLogic logic,
+            IOrderLogic orderLogic, ReportLogic report, BackUpAbstractLogic backUpAbstractLogic)
         {
             InitializeComponent();
             this.logic = logic;
             this.orderLogic = orderLogic;
             this.report = report;
             this.work = work;
+            this.backUpAbstractLogic = backUpAbstractLogic;
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -37,16 +40,14 @@ namespace LawFirmView
         }
         private void LoadData()
         {
-            var listOrders = orderLogic.Read(null);
-            if (listOrders != null)
+            try
             {
-                dataGridView.DataSource = listOrders;
-                dataGridView.Columns[0].Visible = false;
-                dataGridView.Columns[1].Visible = false;
-                dataGridView.Columns[2].Visible = false;
-                dataGridView.Columns[5].Visible = false;
-                dataGridView.Columns[5].AutoSizeMode =
-               DataGridViewAutoSizeColumnMode.Fill;
+                Program.ConfigGrid(orderLogic.Read(null), dataGridView);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
             }
         }
         private void ButtonCreateOrder_Click(object sender, EventArgs e)
@@ -172,6 +173,26 @@ namespace LawFirmView
         {
             var form = Container.Resolve<FormMessages>();
             form.ShowDialog();
+        }
+        private void создатьБэкапToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (backUpAbstractLogic != null)
+                {
+                    var fbd = new FolderBrowserDialog();
+                    if (fbd.ShowDialog() == DialogResult.OK)
+                    {
+                        backUpAbstractLogic.CreateArchive(fbd.SelectedPath);
+                        MessageBox.Show("Бекап создан", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
     }
 }
