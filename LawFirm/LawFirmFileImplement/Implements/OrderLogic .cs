@@ -63,31 +63,34 @@ namespace LawFirmFileImplement.Implements
 
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
-            return source.Orders
-             .Where(
-                rec => model == null
-                || rec.Id == model.Id
-                || model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo
-                || model.ClientId.HasValue && rec.ClientId == model.ClientId
-                || model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ImplementerId.HasValue
-                || model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && rec.Status == OrderStatus.Выполняется
-            )
-            .Select(rec => new OrderViewModel
+           using (var context = new LawFirmDatabase())
             {
-                Id = rec.Id,
-                ClientId = rec.ClientId,
-                ImplementerId = rec.ImplementerId,
-                ProductId = rec.ProductId,
-                ClientFIO = source.Clients.FirstOrDefault(recC => recC.Id == rec.ClientId)?.ClientFIO,
-                ImplementerFIO = source.Implementers.FirstOrDefault(recC => recC.Id == rec.ImplementerId)?.ImplementerFIO,
-                ProductName = source.Products.FirstOrDefault(recP => recP.Id == rec.ProductId)?.ProductName,
-                Count = rec.Count,
-                Sum = rec.Sum,
-                Status = rec.Status,
-                DateCreate = rec.DateCreate,
-                DateImplement = rec.DateImplement
-            })
-            .ToList();
+                return context.Orders
+                .Where(rec => model == null || (rec.Id == model.Id &&
+               model.Id.HasValue) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate
+               >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
+                (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
+               (model.FreeOrders.HasValue && model.FreeOrders.Value &&
+               !rec.ImplementerId.HasValue) ||
+                (model.ImplementerId.HasValue && rec.ImplementerId ==
+               model.ImplementerId && rec.Status == OrderStatus.Выполняется))
+                .Select(rec => new OrderViewModel
+                {
+                    Id = rec.Id,
+                    ClientId = rec.ClientId,
+                    ImplementerId = rec.ImplementerId,
+                    ProductId = rec.ProductId,
+                    DateCreate = rec.DateCreate,
+                    DateImplement = rec.DateImplement,
+                    Status = rec.Status,
+                    Count = rec.Count,
+                    Sum = rec.Sum,
+                    ClientFIO = rec.Client.ClientFIO,
+                    ImplementerFIO = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerFIO : string.Empty,
+                    ProductName = rec.Product.ProductName
+                })
+               .ToList();
         }
 
         private string GetProductName(int productId)
