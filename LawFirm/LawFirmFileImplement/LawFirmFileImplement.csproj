@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LawFirmDataBaseImplement\LawFirmDataBaseImplement.csproj" />
     <ProjectReference Include="..\LawFirmLogic\LawFirmLogic.csproj" />
   </ItemGroup>
 
