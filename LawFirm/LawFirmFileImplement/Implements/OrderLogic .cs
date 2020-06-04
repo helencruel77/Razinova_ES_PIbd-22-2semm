@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using LawFirmLogic.Enums;
+using LawFirmDataBaseImplement;
 
 namespace LawFirmFileImplement.Implements
 {
@@ -63,7 +64,7 @@ namespace LawFirmFileImplement.Implements
 
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
-           using (var context = new LawFirmDatabase())
+            using (var context = new LawFirmDatabase())
             {
                 return context.Orders
                 .Where(rec => model == null || (rec.Id == model.Id &&
@@ -91,14 +92,7 @@ namespace LawFirmFileImplement.Implements
                     ProductName = rec.Product.ProductName
                 })
                .ToList();
-        }
-
-        private string GetProductName(int productId)
-        {
-            string name = "";
-            var product = source.Products.FirstOrDefault(x => x.Id == productId);
-            name = product != null ? product.ProductName : "";
-            return name;
+            }
         }
     }
 }
