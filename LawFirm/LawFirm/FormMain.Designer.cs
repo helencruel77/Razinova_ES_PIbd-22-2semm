@@ -97,11 +97,11 @@
             // отчетыToolStripMenuItem
             // 
             this.отчетыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.списокИзделийToolStripMenuItem,
-            this.компонентыПоИзделямToolStripMenuItem,
-            this.списокЗаказовToolStripMenuItem,
-            this.списокСкладовToolStripMenuItem,
             this.списокКомпонентовToolStripMenuItem,
+            this.списокИзделийToolStripMenuItem,
+            this.списокЗаказовToolStripMenuItem,
+            this.компонентыПоИзделямToolStripMenuItem,
+            this.списокСкладовToolStripMenuItem,
             this.компонентыПоСкладамToolStripMenuItem});
             this.отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
             this.отчетыToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
@@ -118,7 +118,7 @@
             // 
             this.компонентыПоИзделямToolStripMenuItem.Name = "компонентыПоИзделямToolStripMenuItem";
             this.компонентыПоИзделямToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.компонентыПоИзделямToolStripMenuItem.Text = "бланки по пакетам";
+            this.компонентыПоИзделямToolStripMenuItem.Text = "Бланки по пакетам";
             this.компонентыПоИзделямToolStripMenuItem.Click += new System.EventHandler(this.бланкиПоПакетамToolStripMenuItem_Click);
             // 
             // списокЗаказовToolStripMenuItem
