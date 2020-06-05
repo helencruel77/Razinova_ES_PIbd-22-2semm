@@ -11,9 +11,11 @@ namespace LawFirmBusinessLogics.BusinessLogics
     {
 
         private readonly IOrderLogic orderLogic;
-        public MainLogic(IOrderLogic orderLogic)
+        private readonly ISkladLogic skladLogic;
+        public MainLogic(IOrderLogic orderLogic, ISkladLogic skladLogic)
         {
             this.orderLogic = orderLogic;
+            this.skladLogic = skladLogic;
         }
         public void CreateOrder(CreateOrderBindingModel model)
         {
@@ -25,6 +27,11 @@ namespace LawFirmBusinessLogics.BusinessLogics
                 DateCreate = DateTime.Now,
                 Status = OrderStatus.Принят
             });
+        }
+
+        public void FillUpSklad (SkladBlankBindingModel model)
+        {
+            skladLogic.FillUpSklad(model);
         }
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
@@ -39,6 +46,11 @@ namespace LawFirmBusinessLogics.BusinessLogics
             if (order.Status != OrderStatus.Принят)
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
+
+            }
+            if (!skladLogic.CheckAvailable(order.ProductId, order.Count))
+            {
+                throw new Exception("На складах не хватает бланков");
             }
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
@@ -50,6 +62,7 @@ namespace LawFirmBusinessLogics.BusinessLogics
                 DateImplement = DateTime.Now,
                 Status = OrderStatus.Выполняется
             });
+            skladLogic.DeleteFromSklad(order.ProductId, order.Count);
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)
