@@ -1,6 +1,6 @@
-﻿using LawFirmLogic.BindingModels;
-using LawFirmLogic.Interfaces;
-using LawFirmLogic.ViewModels;
+﻿using LawFirmBusinessLogics.BindingModels;
+using LawFirmBusinessLogics.Interfaces;
+using LawFirmBusinessLogics.ViewModels;
 using LawFirmDataBaseImplement.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -26,10 +26,10 @@ namespace LawFirmDataBaseImplement.Implements
                 }
                 else
                 {
-                    element = new Order {};
+                    element = new Order();
                     context.Orders.Add(element);
                 }
-                element.ProductId = model.ProductId == 0 ? element.ProductId : model.ProductId;
+                element.ProductId = model.ProductId;
                 element.Count = model.Count;
                 element.Sum = model.Sum;
                 element.Status = model.Status;

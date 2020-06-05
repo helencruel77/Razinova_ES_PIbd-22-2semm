@@ -125,6 +125,18 @@ namespace LawFirmView
             var form = Container.Resolve<FormProducts>();
             form.ShowDialog();
         }
+
+        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormSklads>();
+            form.ShowDialog();
+        }
+
+        private void пополнитьСкладToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormFillUpSklad>();
+            form.ShowDialog();
+        }
         private void ComponentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
