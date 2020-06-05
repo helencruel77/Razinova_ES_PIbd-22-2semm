@@ -28,24 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.ButtonAdd = new System.Windows.Forms.Button();
             this.ButtonUpd = new System.Windows.Forms.Button();
             this.ButtonDel = new System.Windows.Forms.Button();
             this.ButtonRef = new System.Windows.Forms.Button();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dataGridView
-            // 
-            this.dataGridView.BackgroundColor = System.Drawing.SystemColors.HighlightText;
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(1, 2);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.dataGridView.ShowCellErrors = false;
-            this.dataGridView.Size = new System.Drawing.Size(431, 275);
-            this.dataGridView.TabIndex = 0;
             // 
             // ButtonAdd
             // 
@@ -87,16 +76,24 @@
             this.ButtonRef.UseVisualStyleBackColor = true;
             this.ButtonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
-            // FormForgeProducts
+            // dataGridView
+            // 
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Location = new System.Drawing.Point(12, 12);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.Size = new System.Drawing.Size(441, 258);
+            this.dataGridView.TabIndex = 5;
+            // 
+            // FormProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(578, 282);
+            this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.ButtonRef);
             this.Controls.Add(this.ButtonDel);
             this.Controls.Add(this.ButtonUpd);
             this.Controls.Add(this.ButtonAdd);
-            this.Controls.Add(this.dataGridView);
             this.Name = "FormProducts";
             this.Text = "Пакеты документов";
             this.Load += new System.EventHandler(this.FormProducts_Load);
@@ -106,11 +103,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button ButtonAdd;
         private System.Windows.Forms.Button ButtonUpd;
         private System.Windows.Forms.Button ButtonDel;
         private System.Windows.Forms.Button ButtonRef;
+        private System.Windows.Forms.DataGridView dataGridView;
     }
 }

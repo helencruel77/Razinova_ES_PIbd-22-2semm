@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace LawFirmFileImplement.Models
+namespace LawFirmDataBaseImplement.Models
 {
     public class Blank
     {
@@ -15,5 +15,8 @@ namespace LawFirmFileImplement.Models
 
         [ForeignKey("BlankId")]
         public virtual List<ProductBlank> ProductBlanks { get; set; }
+
+        [ForeignKey("BlankId")]
+        public virtual List<SkladBlank> SkladBlanks { get; set; }
     }
 }

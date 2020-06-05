@@ -33,19 +33,35 @@ namespace LawFirmView
         {
             try
             {
-                var listS = skladlogic.GetList();
-                comboBoxSklad.DataSource = listS;
-                comboBoxSklad.DisplayMember = "SkladName";
-                comboBoxSklad.ValueMember = "Id";
-                var listB = blanklogic.Read(null);
-                comboBoxBlank.DataSource = listB;
-                comboBoxBlank.DisplayMember = "BlankName";
-                comboBoxBlank.ValueMember = "Id";
+                List<BlankViewModel> list = blanklogic.Read(null);
+                if (list != null)
+                {
+                    comboBoxBlank.DisplayMember = "BlankName";
+                    comboBoxBlank.ValueMember = "Id";
+                    comboBoxBlank.DataSource = list;
+                    comboBoxBlank.SelectedItem = null;
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
+            }
+
+            try
+            {
+                List<SkladViewModel> list = skladlogic.GetList();
+                if (list != null)
+                {
+                    comboBoxSklad.DisplayMember = "SkladName";
+                    comboBoxSklad.ValueMember = "Id";
+                    comboBoxSklad.DataSource = list;
+                    comboBoxSklad.SelectedItem = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }

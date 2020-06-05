@@ -1,8 +1,7 @@
 ﻿using LawFirmBusinessLogics.BindingModels;
 using LawFirmBusinessLogics.Interfaces;
 using LawFirmBusinessLogics.ViewModels;
-using LawFirmDataBaseImplement;
-using LawFirmFileImplement.Models;
+using LawFirmDataBaseImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
