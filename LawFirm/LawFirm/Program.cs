@@ -1,5 +1,5 @@
-﻿using LawFirmLogic.BusinessLogics;
-using LawFirmLogic.Interfaces;
+﻿using LawFirmBusinessLogics.BusinessLogics;
+using LawFirmBusinessLogics.Interfaces;
 using LawFirmDataBaseImplement.Implements;
 using System;
 using System.Windows.Forms;

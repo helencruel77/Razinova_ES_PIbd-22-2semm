@@ -1,13 +1,13 @@
-﻿using LawFirmLogic.BindingModels;
-using LawFirmLogic.HelperModels;
-using LawFirmLogic.Interfaces;
-using LawFirmLogic.ViewModels;
+﻿using LawFirmBusinessLogics.BindingModels;
+using LawFirmBusinessLogics.HelperModels;
+using LawFirmBusinessLogics.Interfaces;
+using LawFirmBusinessLogics.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LawFirmLogic.BusinessLogics
+namespace LawFirmBusinessLogics.BusinessLogics
 {
     public class ReportLogic
     {

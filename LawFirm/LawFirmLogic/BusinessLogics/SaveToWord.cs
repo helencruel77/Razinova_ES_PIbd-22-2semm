@@ -4,9 +4,9 @@ using System.Text;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using LawFirmLogic.HelperModels;
+using LawFirmBusinessLogics.HelperModels;
 
-namespace LawFirmLogic.BusinessLogics
+namespace LawFirmBusinessLogics.BusinessLogics
 {
     static class SaveToWord
     {/// <summary>

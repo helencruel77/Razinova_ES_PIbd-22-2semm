@@ -7,11 +7,11 @@ using DocumentFormat.OpenXml.Office2013.Excel;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System.Linq;
-using LawFirmLogic.HelperModels;
-using LawFirmLogic.ViewModels;
-using LawFirmLogic.BindingModels;
+using LawFirmBusinessLogics.HelperModels;
+using LawFirmBusinessLogics.ViewModels;
+using LawFirmBusinessLogics.BindingModels;
 
-namespace LawFirmLogic.BusinessLogics
+namespace LawFirmBusinessLogics.BusinessLogics
 {
     static class SaveToExcel
     {

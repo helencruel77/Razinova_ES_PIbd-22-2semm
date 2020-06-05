@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LawFirmLogic.ViewModels
+namespace LawFirmBusinessLogics.ViewModels
 {
     public class ReportProductBlankViewModel
     {

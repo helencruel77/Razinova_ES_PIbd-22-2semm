@@ -1,9 +1,9 @@
-﻿using LawFirmLogic.ViewModels;
+﻿using LawFirmBusinessLogics.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LawFirmLogic.HelperModels
+namespace LawFirmBusinessLogics.HelperModels
 {
     class ExcelInfo
     {

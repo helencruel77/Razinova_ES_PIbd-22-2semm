@@ -1,4 +1,4 @@
-﻿namespace LawFirmLogic.Enums
+﻿namespace LawFirmBusinessLogics.Enums
 {
     public enum OrderStatus
     {

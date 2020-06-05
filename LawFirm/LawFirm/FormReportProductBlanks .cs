@@ -1,5 +1,5 @@
-﻿using LawFirmLogic.BindingModels;
-using LawFirmLogic.BusinessLogics;
+﻿using LawFirmBusinessLogics.BindingModels;
+using LawFirmBusinessLogics.BusinessLogics;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;

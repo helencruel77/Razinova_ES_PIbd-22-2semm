@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using LawFirmLogic.HelperModels;
+using LawFirmBusinessLogics.HelperModels;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 
 
-namespace LawFirmLogic.BusinessLogics
+namespace LawFirmBusinessLogics.BusinessLogics
 {
     static class SaveToPdf
     {
