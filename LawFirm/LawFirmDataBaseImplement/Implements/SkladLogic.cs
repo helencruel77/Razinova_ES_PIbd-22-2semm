@@ -73,7 +73,8 @@ namespace LawFirmDataBaseImplement.Implements
         {
             using (var context = new LawFirmDatabase())
             {
-                var item = context.SkladBlanks.FirstOrDefault(x => x.BlankId == model.BlankId && x.SkladId == model.SkladId);
+                var item = context.SkladBlanks.FirstOrDefault(x => x.BlankId == model.BlankId
+    && x.SkladId == model.SkladId);
 
                 if (item != null)
                 {
@@ -153,22 +154,19 @@ namespace LawFirmDataBaseImplement.Implements
                     try
                     {
                         var productBlanks = context.ProductBlanks.Where(x => x.ProductId == productId);
-                        if (productBlanks.Count() == 0)
-                            return;
+                        if (productBlanks.Count() == 0) return;
                         foreach (var elem in productBlanks)
                         {
                             int left = elem.Count * count;
-                            var skladBlanks = context.ProductBlanks.Where(x => x.BlankId == elem.BlankId);
-                            int available = skladBlanks.Sum(x => x.Count);
-                            if (available < left)
-                                throw new Exception("Недостаточно деталей на складе");
-                            foreach (var rec in skladBlanks)
+                            var skladblanks = context.SkladBlanks.Where(x => x.BlankId == elem.BlankId);
+                            int available = skladblanks.Sum(x => x.Count);
+                            if (available < left) throw new Exception("Недостаточно продуктов на складе");
+                            foreach (var rec in skladblanks)
                             {
                                 int toRemove = left > rec.Count ? rec.Count : left;
                                 rec.Count -= toRemove;
                                 left -= toRemove;
-                                if (left == 0)
-                                    break;
+                                if (left == 0) break;
                             }
                         }
                         context.SaveChanges();
@@ -178,7 +176,7 @@ namespace LawFirmDataBaseImplement.Implements
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        throw;
+                        throw ex;
                     }
                 }
             }

@@ -26,7 +26,7 @@ namespace LawFirmDataBaseImplement.Implements
                 }
                 else
                 {
-                    element = new Order {};
+                    element = new Order();
                     context.Orders.Add(element);
                 }
                 element.ProductId = model.ProductId;

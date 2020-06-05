@@ -39,6 +39,7 @@
             this.buttonUpd = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridViewProduct = new System.Windows.Forms.DataGridView();
+            this.idblank = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProduct)).BeginInit();
@@ -140,24 +141,31 @@
             // 
             this.dataGridViewProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewProduct.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idblank,
             this.Column1,
             this.Column2});
-            this.dataGridViewProduct.Location = new System.Drawing.Point(15, 90);
+            this.dataGridViewProduct.Location = new System.Drawing.Point(15, 101);
             this.dataGridViewProduct.Name = "dataGridViewProduct";
-            this.dataGridViewProduct.Size = new System.Drawing.Size(436, 271);
+            this.dataGridViewProduct.Size = new System.Drawing.Size(423, 278);
             this.dataGridViewProduct.TabIndex = 12;
+            // 
+            // idblank
+            // 
+            this.idblank.HeaderText = "Column1";
+            this.idblank.Name = "idblank";
+            this.idblank.Visible = false;
             // 
             // Column1
             // 
             this.Column1.HeaderText = "Бланк";
             this.Column1.Name = "Column1";
-            this.Column1.Width = 250;
+            this.Column1.Width = 230;
             // 
             // Column2
             // 
             this.Column2.HeaderText = "Количество";
             this.Column2.Name = "Column2";
-            this.Column2.Width = 140;
+            this.Column2.Width = 150;
             // 
             // FormProduct
             // 
@@ -197,6 +205,7 @@
         private System.Windows.Forms.Button buttonUpd;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.DataGridView dataGridViewProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idblank;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
     }
