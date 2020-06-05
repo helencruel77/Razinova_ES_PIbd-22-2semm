@@ -61,7 +61,7 @@
             // 
             // ReportProductBlankViewModelBindingSource
             // 
-            this.ReportProductBlankViewModelBindingSource.DataSource = typeof(LawFirmLogic.ViewModels.ReportProductBlankViewModel);
+            this.ReportProductBlankViewModelBindingSource.DataSource = typeof(LawFirmBusinessLogics.ViewModels.ReportProductBlankViewModel);
             // 
             // FormReportProductBlanks
             // 

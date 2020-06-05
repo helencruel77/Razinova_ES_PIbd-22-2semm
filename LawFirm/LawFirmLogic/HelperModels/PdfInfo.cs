@@ -12,5 +12,7 @@ namespace LawFirmBusinessLogics.HelperModels
         public string Title { get; set; }
 
         public List<ReportProductBlankViewModel> ProductBlanks { get; set; }
+
+        public List<ReportSkladBlankViewModel> SkladBlanks { get; internal set; }
     }
 }

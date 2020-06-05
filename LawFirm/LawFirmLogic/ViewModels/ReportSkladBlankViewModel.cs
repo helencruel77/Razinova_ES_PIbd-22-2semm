@@ -4,10 +4,12 @@ using System.Text;
 
 namespace LawFirmBusinessLogics.ViewModels
 {
-    public class ReportProductBlankViewModel
+    public class ReportSkladBlankViewModel
     {
+        public string SkladName { get; set; }
+
         public string BlankName { get; set; }
-        public string ProductName { get; set; }
-        public int TotalCount { get; set; }
+
+        public int Count { get; set; }
     }
 }

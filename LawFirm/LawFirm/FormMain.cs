@@ -1,8 +1,4 @@
-﻿using LawFirmBusinessLogics.BindingModels;
-using LawFirmBusinessLogics.BusinessLogics;
-using LawFirmBusinessLogics.Interfaces;
-using LawFirm;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
+using LawFirmBusinessLogics.BusinessLogics;
+using LawFirmBusinessLogics.Interfaces;
+using LawFirmBusinessLogics.BindingModels;
+using LawFirm;
 
 namespace LawFirmView
 {
@@ -20,14 +20,15 @@ namespace LawFirmView
         [Dependency]
         public new IUnityContainer Container { get; set; }
         private readonly MainLogic logic;
+        private readonly ReportLogic reportLogic;
         private readonly IOrderLogic orderLogic;
-        private readonly ReportLogic report;
-        public FormMain(MainLogic logic, IOrderLogic orderLogic, ReportLogic report)
+
+        public FormMain(MainLogic logic, ReportLogic reportLogic, IOrderLogic orderLogic)
         {
             InitializeComponent();
             this.logic = logic;
+            this.reportLogic = reportLogic;
             this.orderLogic = orderLogic;
-            this.report = report;
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -43,7 +44,7 @@ namespace LawFirmView
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)
@@ -52,12 +53,14 @@ namespace LawFirmView
                MessageBoxIcon.Error);
             }
         }
+
         private void ButtonCreateOrder_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormCreateOrder>();
             form.ShowDialog();
             LoadData();
         }
+
         private void ButtonTakeOrderInWork_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -75,6 +78,7 @@ namespace LawFirmView
                 }
             }
         }
+
         private void ButtonOrderReady_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -92,6 +96,7 @@ namespace LawFirmView
                 }
             }
         }
+
         private void ButtonPayOrder_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -126,35 +131,19 @@ namespace LawFirmView
             form.ShowDialog();
         }
 
-        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormSklads>();
-            form.ShowDialog();
-        }
-
-        private void пополнитьСкладToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormFillUpSklad>();
-            form.ShowDialog();
-        }
-        private void ComponentsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void списокПакетовДокументовToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    report.SaveComponentsToWordFile(new ReportBindingModel
-                    {
-                        FileName =
-                   dialog.FileName
-                    });
-                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
-                   MessageBoxIcon.Information);
+                    reportLogic.SaveProductsToWordFile(new ReportBindingModel { FileName = dialog.FileName });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
 
-        private void бланкиПоПакетамДокументовToolStripMenuItem_Click(object sender, EventArgs e)
+        private void бланкиПоПакетамToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormReportProductBlanks>();
             form.ShowDialog();
@@ -164,6 +153,42 @@ namespace LawFirmView
         {
             var form = Container.Resolve<FormReportOrders>();
             form.ShowDialog();
+        }
+
+        private void ButtonFillWarehouse_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormFillUpSklad>();
+            form.ShowDialog();
+        }
+
+        private void cкладыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormSklads>();
+            form.ShowDialog();
+        }
+
+        private void компонентыПоСкладамToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportSkladBlanks>();
+            form.ShowDialog();
+        }
+
+        private void списокБланковToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportBlanks>();
+            form.ShowDialog();
+        }
+
+        private void списокСкладовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    reportLogic.SaveSkladsToWordFile(new ReportBindingModel { FileName = dialog.FileName });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }

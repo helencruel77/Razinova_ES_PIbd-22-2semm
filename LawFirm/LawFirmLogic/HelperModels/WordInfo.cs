@@ -10,5 +10,6 @@ namespace LawFirmBusinessLogics.HelperModels
         public string FileName { get; set; }
         public string Title { get; set; }
         public List<ProductViewModel> Products { get; set; }
+        public List<SkladViewModel> Sklads { get; set; }
     }
 }
