@@ -216,8 +216,7 @@ namespace LawFirmListImplement.Implements
             foreach (var elem in productBlanks)
             {
                 int count = 0;
-                var skladBlanks = source.SkladBlanks.FindAll(x => x.BlankId == elem.BlankId);
-                count = skladBlanks.Sum(x => x.Count);
+                count = source.SkladBlanks.FindAll(x => x.BlankId == elem.BlankId).Sum(x => x.Count);
                 if (count < elem.Count * ProductsCount)
                     return false;
             }
