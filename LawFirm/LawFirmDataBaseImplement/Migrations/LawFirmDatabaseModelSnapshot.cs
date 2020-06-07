@@ -89,8 +89,6 @@ namespace LawFirmDataBaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
-
                     b.HasIndex("ClientId");
 
                     b.HasIndex("ProductId");
@@ -179,7 +177,6 @@ namespace LawFirmDataBaseImplement.Migrations
                     b.HasIndex("SkladId");
 
                     b.ToTable("SkladBlanks");
-                    b.ToTable("ProductBlanks");
                 });
 
             modelBuilder.Entity("LawFirmDataBaseImplement.Models.Order", b =>
@@ -190,14 +187,6 @@ namespace LawFirmDataBaseImplement.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LawFirmDataBaseImplement.Models.Product", "Product")
-                        .WithMany("Orders")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-            modelBuilder.Entity("LawFirmDataBaseImplement.Models.Order", b =>
-                {
                     b.HasOne("LawFirmDataBaseImplement.Models.Product", "Product")
                         .WithMany("Orders")
                         .HasForeignKey("ProductId")
@@ -228,9 +217,6 @@ namespace LawFirmDataBaseImplement.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LawFirmDataBaseImplement.Models.Product", "Product")
-                        .WithMany("ProductBlanks")
-                        .HasForeignKey("BlankId");
                     b.HasOne("LawFirmDataBaseImplement.Models.Sklad", "Sklad")
                         .WithMany("SkladBlank")
                         .HasForeignKey("SkladId")
