@@ -91,9 +91,9 @@ namespace LawFirmFileImplement.Implements
                 throw new Exception("Элемент не найден");
             }
         }
-        public void DelElement(int id)
+        public void DelElement(SkladBindingModel model)
         {
-            var elem = source.Sklads.FirstOrDefault(x => x.Id == id);
+            var elem = source.Sklads.FirstOrDefault(x => x.Id == model.Id);
             if (elem != null)
                 source.Sklads.Remove(elem);
             else

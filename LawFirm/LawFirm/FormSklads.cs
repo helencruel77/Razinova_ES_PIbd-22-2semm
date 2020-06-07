@@ -81,7 +81,7 @@ namespace LawFirmView
                    Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        logic.DelElement(id);
+                        logic.DelElement(new SkladBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {

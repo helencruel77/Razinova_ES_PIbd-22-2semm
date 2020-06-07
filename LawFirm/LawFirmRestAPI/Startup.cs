@@ -31,6 +31,8 @@ namespace LawFirmRestAPI
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IProductLogic, ProductLogic>();
+            services.AddTransient<ISkladLogic, SkladLogic>();
+            services.AddTransient<IBlankLogic, BlankLogic>();
             services.AddTransient<MainLogic>();
             services.AddControllers();
         }

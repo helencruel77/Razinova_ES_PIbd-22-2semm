@@ -155,11 +155,11 @@ namespace LawFirmListImplement.Implements
             source.Sklads[index].SkladName = model.SkladName;
         }
 
-        public void DelElement(int id)
+        public void DelElement(SkladBindingModel model)
         {
             for (int i = 0; i < source.SkladBlanks.Count; ++i)
             {
-                if (source.SkladBlanks[i].SkladId == id)
+                if (source.SkladBlanks[i].SkladId == model.Id)
                 {
                     source.SkladBlanks.RemoveAt(i--);
                 }
@@ -167,7 +167,7 @@ namespace LawFirmListImplement.Implements
 
             for (int i = 0; i < source.Sklads.Count; ++i)
             {
-                if (source.Sklads[i].Id == id)
+                if (source.Sklads[i].Id == model.Id)
                 {
                     source.Sklads.RemoveAt(i);
                     return;

@@ -128,19 +128,32 @@ namespace LawFirmDataBaseImplement.Implements
             }
         }
 
-        public void DelElement(int id)
+        public void DelElement(SkladBindingModel model)
         {
             using (var context = new LawFirmDatabase())
             {
-                var elem = context.Sklads.FirstOrDefault(x => x.Id == id);
-                if (elem != null)
+                using (var transaction = context.Database.BeginTransaction())
                 {
-                    context.Sklads.Remove(elem);
-                    context.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("Элемент не найден");
+                    try
+                    {
+                        context.SkladBlanks.RemoveRange(context.SkladBlanks.Where(rec => rec.SkladId == model.Id));
+                        Sklad element = context.Sklads.FirstOrDefault(rec => rec.Id == model.Id);
+                        if (element != null)
+                        {
+                            context.Sklads.Remove(element);
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            throw new Exception("Элемент не найден");
+                        }
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
                 }
             }
         }

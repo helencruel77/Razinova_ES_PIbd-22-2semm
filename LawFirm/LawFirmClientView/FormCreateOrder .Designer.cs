@@ -44,7 +44,7 @@
             this.labelProduct.Name = "labelProduct";
             this.labelProduct.Size = new System.Drawing.Size(54, 13);
             this.labelProduct.TabIndex = 0;
-            this.labelProduct.Text = "Изделие:";
+            this.labelProduct.Text = "Пакет:";
             //
             // comboBoxProduct
             // 
