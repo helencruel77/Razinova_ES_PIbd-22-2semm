@@ -230,7 +230,7 @@ namespace LawFirmDataBaseImplement.Migrations
 
                     b.HasOne("LawFirmDataBaseImplement.Models.Product", "Product")
                         .WithMany("ProductBlanks")
-                        .HasForeignKey("BlankId")
+                        .HasForeignKey("BlankId");
                     b.HasOne("LawFirmDataBaseImplement.Models.Sklad", "Sklad")
                         .WithMany("SkladBlank")
                         .HasForeignKey("SkladId")

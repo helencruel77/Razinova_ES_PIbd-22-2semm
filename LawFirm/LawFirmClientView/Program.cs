@@ -1,4 +1,4 @@
-using LawFirmLogic.ViewModels;
+using LawFirmBusinessLogics.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

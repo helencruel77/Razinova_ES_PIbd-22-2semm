@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LawFirmLogic.BindingModels;
-using LawFirmLogic.Interfaces;
-using LawFirmLogic.ViewModels;
+using LawFirmBusinessLogics.BindingModels;
+using LawFirmBusinessLogics.Interfaces;
+using LawFirmBusinessLogics.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

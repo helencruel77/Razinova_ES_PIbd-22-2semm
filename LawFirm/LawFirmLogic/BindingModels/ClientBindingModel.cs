@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace LawFirmLogic.BindingModels
+namespace LawFirmBusinessLogics.BindingModels
 {
     public class ClientBindingModel
     {

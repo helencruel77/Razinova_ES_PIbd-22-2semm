@@ -1,4 +1,4 @@
-﻿using LawFirmLogic.BindingModels;
+﻿using LawFirmBusinessLogics.BindingModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

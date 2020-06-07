@@ -1,5 +1,5 @@
-﻿using LawFirmLogic.BindingModels;
-using LawFirmLogic.ViewModels;
+﻿using LawFirmBusinessLogics.BindingModels;
+using LawFirmBusinessLogics.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

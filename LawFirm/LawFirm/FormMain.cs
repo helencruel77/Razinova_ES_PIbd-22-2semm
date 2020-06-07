@@ -1,7 +1,4 @@
-﻿using LawFirmLogic.BindingModels;
-using LawFirmLogic.BusinessLogics;
-using LawFirmLogic.Interfaces;
-using LawFirm;
+﻿using LawFirm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +12,6 @@ using Unity;
 using LawFirmBusinessLogics.BusinessLogics;
 using LawFirmBusinessLogics.Interfaces;
 using LawFirmBusinessLogics.BindingModels;
-using LawFirm;
 
 namespace LawFirmView
 {

@@ -5,8 +5,6 @@ using System;
 using System.Windows.Forms;
 using Unity;
 using Unity.Lifetime;
-using LawFirmLogic.Interfaces;
-using LawFirmLogic.BusinessLogics;
 
 namespace LawFirmView
 {
