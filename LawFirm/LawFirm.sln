@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LawFirmView", "LawFirm\LawF
 		{B617D3E5-A4C5-4D83-93A8-D94738611029} = {B617D3E5-A4C5-4D83-93A8-D94738611029}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawFirmLogic", "LawFirmLogic\LawFirmLogic.csproj", "{6170CF54-5EF8-487D-87E6-6EB67D437C6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawFirmBusinessLogics", "LawFirmLogic\LawFirmBusinessLogics.csproj", "{6170CF54-5EF8-487D-87E6-6EB67D437C6D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawFirmListImplement", "LawFirmListImplement\LawFirmListImplement.csproj", "{B617D3E5-A4C5-4D83-93A8-D94738611029}"
 EndProject

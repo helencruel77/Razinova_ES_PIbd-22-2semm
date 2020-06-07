@@ -1,5 +1,5 @@
-﻿using LawFirmLogic.BindingModels;
-using LawFirmLogic.BusinessLogics;
+﻿using LawFirmBusinessLogics.BindingModels;
+using LawFirmBusinessLogics.BusinessLogics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -64,8 +64,11 @@ namespace LawFirm
 
             try
             {
-                var dict = logic.GetOrders(new ReportBindingModel { 
-                    DateFrom = dateTimePickerFrom.Value.Date, DateTo = dateTimePickerTo.Value.Date });
+                var dict = logic.GetOrders(new ReportBindingModel
+                {
+                    DateFrom = dateTimePickerFrom.Value.Date,
+                    DateTo = dateTimePickerTo.Value.Date
+                });
 
                 if (dict != null)
                 {

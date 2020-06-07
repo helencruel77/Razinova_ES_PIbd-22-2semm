@@ -1,9 +1,9 @@
-﻿using LawFirmLogic.ViewModels;
+﻿using LawFirmBusinessLogics.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LawFirmLogic.HelperModels
+namespace LawFirmBusinessLogics.HelperModels
 {
     class PdfInfo
     {
@@ -12,5 +12,7 @@ namespace LawFirmLogic.HelperModels
         public string Title { get; set; }
 
         public List<ReportProductBlankViewModel> ProductBlanks { get; set; }
+
+        public List<ReportSkladBlankViewModel> SkladBlanks { get; internal set; }
     }
 }

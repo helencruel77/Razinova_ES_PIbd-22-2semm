@@ -1,5 +1,4 @@
-﻿using LawFirmLogic.Enums;
-using LawFirmDataBaseImplement.Models;
+﻿using LawFirmBusinessLogics.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

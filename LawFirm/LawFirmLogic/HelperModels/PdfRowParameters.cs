@@ -4,7 +4,7 @@ using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Tables;
 using System.Text;
 
-namespace LawFirmLogic.HelperModels
+namespace LawFirmBusinessLogics.HelperModels
 {
     class PdfRowParameters
     {

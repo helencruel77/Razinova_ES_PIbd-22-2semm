@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using LawFirmLogic.BindingModels;
-using LawFirmLogic.Interfaces;
+using LawFirmBusinessLogics.BindingModels;
+using LawFirmBusinessLogics.Interfaces;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
-using LawFirmLogic.ViewModels;
+using LawFirmBusinessLogics.ViewModels;
 
 namespace LawFirmView
 {
@@ -35,8 +35,9 @@ namespace LawFirmView
                 {
                     ProductViewModel view = logic.Read(new ProductBindingModel
                     {
-                        Id = id.Value })?[0];
-                    if (view == null)
+                        Id = id.Value
+                    })?[0];
+                    if (view != null)
                     {
                         textBoxName.Text = view.ProductName;
                         textBoxPrice.Text = view.Price.ToString();
@@ -46,8 +47,7 @@ namespace LawFirmView
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -64,16 +64,14 @@ namespace LawFirmView
                     dataGridViewProduct.Rows.Clear();
                     foreach (var pc in productBlanks)
                     {
-                        dataGridViewProduct.Rows.Add(new object[] { pc.Key, pc.Value.Item1,
-                        pc.Value.Item2 });
+                        dataGridViewProduct.Rows.Add(new object[] { pc.Key, pc.Value.Item1, pc.Value.Item2 });
                     }
                 }
-                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-MessageBoxIcon.Error);
+   MessageBoxIcon.Error);
             }
         }
         private void ButtonAdd_Click(object sender, EventArgs e)

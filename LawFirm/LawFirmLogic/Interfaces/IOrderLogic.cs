@@ -1,10 +1,10 @@
-﻿using LawFirmLogic.BindingModels;
-using LawFirmLogic.ViewModels;
+﻿using LawFirmBusinessLogics.BindingModels;
+using LawFirmBusinessLogics.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LawFirmLogic.Interfaces
+namespace LawFirmBusinessLogics.Interfaces
 {
     public interface IOrderLogic
     {

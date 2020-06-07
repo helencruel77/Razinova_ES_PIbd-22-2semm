@@ -257,6 +257,12 @@
     <Compile Include="FormBlanks.Designer.cs">
       <DependentUpon>FormBlanks.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormFillUpSklad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFillUpSklad.Designer.cs">
+      <DependentUpon>FormFillUpSklad.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -281,6 +287,12 @@
     <Compile Include="FormProducts.Designer.cs">
       <DependentUpon>FormProducts.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReportBlanks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportBlanks.Designer.cs">
+      <DependentUpon>FormReportBlanks.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormReportOrders .cs">
       <SubType>Form</SubType>
     </Compile>
@@ -293,8 +305,41 @@
     <Compile Include="FormReportProductBlanks .Designer.cs">
       <DependentUpon>FormReportProductBlanks .cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReportSkladBlanks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportSkladBlanks.Designer.cs">
+      <DependentUpon>FormReportSkladBlanks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSklad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSklad.Designer.cs">
+      <DependentUpon>FormSklad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSklads.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSklads.Designer.cs">
+      <DependentUpon>FormSklads.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormBlank.resx">
+      <DependentUpon>FormBlank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFillUpSklad.resx">
+      <DependentUpon>FormFillUpSklad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSklad.resx">
+      <DependentUpon>FormSklad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSklads.resx">
+      <DependentUpon>FormSklads.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="FormProduct.resx">
       <DependentUpon>FormProduct.cs</DependentUpon>
@@ -316,7 +361,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Report.rdlc" />
+    <EmbeddedResource Include="ReportBlanks.rdlc" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\LawFirmBusinessLogics.ViewModels.ReportProductBlankViewModel.datasource" />
     <None Include="Properties\DataSources\LawFirmDataBaseImplement.Implements.BlankLogic.datasource" />
     <None Include="Properties\DataSources\LawFirmDataBaseImplement.Implements.OrderLogic.datasource" />
     <None Include="Properties\DataSources\LawFirmDataBaseImplement.Implements.ProductLogic.datasource" />
@@ -348,9 +395,9 @@
       <Project>{e51c8399-dc19-46cb-8f9a-62ef64c66e26}</Project>
       <Name>LawFirmDataBaseImplement</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LawFirmLogic\LawFirmLogic.csproj">
-      <Project>{6170cf54-5ef8-487d-87e6-6eb67d437c6d}</Project>
-      <Name>LawFirmLogic</Name>
+    <ProjectReference Include="..\LawFirmLogic\LawFirmBusinessLogics.csproj">
+      <Project>{6170CF54-5EF8-487D-87E6-6EB67D437C6D}</Project>
+      <Name>LawFirmBusinessLogics</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

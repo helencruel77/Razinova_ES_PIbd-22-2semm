@@ -1,6 +1,6 @@
-﻿using LawFirmLogic.BindingModels;
-using LawFirmLogic.Interfaces;
-using LawFirmLogic.ViewModels;
+﻿using LawFirmBusinessLogics.BindingModels;
+using LawFirmBusinessLogics.Interfaces;
+using LawFirmBusinessLogics.ViewModels;
 using LawFirmDataBaseImplement.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,7 +24,7 @@ namespace LawFirmDataBaseImplement.Implements
                        rec.ProductName == model.ProductName && rec.Id != model.Id);
                         if (element != null)
                         {
-                            throw new Exception("Уже есть пакет документов с таким названием");
+                            throw new Exception("Уже есть изделие с таким названием");
                         }
                         if (model.Id.HasValue)
                         {
@@ -45,20 +45,20 @@ namespace LawFirmDataBaseImplement.Implements
                         context.SaveChanges();
                         if (model.Id.HasValue)
                         {
-                            var productBlanks = context.ProductBlanks.Where(rec
+                            var productComponents = context.ProductBlanks.Where(rec
                            => rec.ProductId == model.Id.Value).ToList();
                             // удалили те, которых нет в модели
 
-                            context.ProductBlanks.RemoveRange(productBlanks.Where(rec =>
+                            context.ProductBlanks.RemoveRange(productComponents.Where(rec =>
                             !model.ProductBlanks.ContainsKey(rec.BlankId)).ToList());
                             context.SaveChanges();
                             // обновили количество у существующих записей
-                            foreach (var updateBlank in productBlanks)
+                            foreach (var updateComponent in productComponents)
                             {
-                                updateBlank.Count =
-                               model.ProductBlanks[updateBlank.BlankId].Item2;
+                                updateComponent.Count =
+                               model.ProductBlanks[updateComponent.BlankId].Item2;
 
-                                model.ProductBlanks.Remove(updateBlank.BlankId);
+                                model.ProductBlanks.Remove(updateComponent.BlankId);
                             }
                             context.SaveChanges();
                         }
@@ -75,7 +75,6 @@ namespace LawFirmDataBaseImplement.Implements
                         }
                         transaction.Commit();
                     }
-
                     catch (Exception)
                     {
                         transaction.Rollback();
@@ -95,7 +94,8 @@ namespace LawFirmDataBaseImplement.Implements
                         // удаяем записи по компонентам при удалении изделия
                         context.ProductBlanks.RemoveRange(context.ProductBlanks.Where(rec =>
                         rec.ProductId == model.Id));
-                        Product element = context.Products.FirstOrDefault(rec => rec.Id == model.Id);
+                        Product element = context.Products.FirstOrDefault(rec => rec.Id
+                        == model.Id);
                         if (element != null)
                         {
                             context.Products.Remove(element);
@@ -128,7 +128,7 @@ namespace LawFirmDataBaseImplement.Implements
                    ProductName = rec.ProductName,
                    Price = rec.Price,
                    ProductBlanks = context.ProductBlanks
-                .Include(recPC => recPC.Blank)
+                   .Include(recPC => recPC.Blank)
                .Where(recPC => recPC.ProductId == rec.Id)
                .ToDictionary(recPC => recPC.BlankId, recPC =>
                 (recPC.Blank?.BlankName, recPC.Count))

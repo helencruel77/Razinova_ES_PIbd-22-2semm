@@ -1,19 +1,21 @@
-﻿using LawFirmLogic.BindingModels;
-using LawFirmLogic.Enums;
-using LawFirmLogic.Interfaces;
+﻿using LawFirmBusinessLogics.BindingModels;
+using LawFirmBusinessLogics.Enums;
+using LawFirmBusinessLogics.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LawFirmLogic.BusinessLogics
+namespace LawFirmBusinessLogics.BusinessLogics
 {
     public class MainLogic
     {
 
         private readonly IOrderLogic orderLogic;
-        public MainLogic(IOrderLogic orderLogic)
+        private readonly ISkladLogic skladLogic;
+        public MainLogic(IOrderLogic orderLogic, ISkladLogic skladLogic)
         {
             this.orderLogic = orderLogic;
+            this.skladLogic = skladLogic;
         }
         public void CreateOrder(CreateOrderBindingModel model)
         {
@@ -27,6 +29,11 @@ namespace LawFirmLogic.BusinessLogics
                 DateCreate = DateTime.Now,
                 Status = OrderStatus.Принят
             });
+        }
+
+        public void FillUpSklad (SkladBlankBindingModel model)
+        {
+            skladLogic.AddComponent(model);
         }
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
@@ -42,6 +49,7 @@ namespace LawFirmLogic.BusinessLogics
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
+            skladLogic.DeleteFromSklad(order.ProductId, order.Count);
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
@@ -51,7 +59,7 @@ namespace LawFirmLogic.BusinessLogics
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
+                DateImplement = null,
                 Status = OrderStatus.Выполняется
             });
         }
@@ -79,7 +87,7 @@ namespace LawFirmLogic.BusinessLogics
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement,
+                DateImplement = DateTime.Now,
                 Status = OrderStatus.Готов
             });
         }

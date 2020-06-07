@@ -9,6 +9,8 @@ namespace LawFirmListImplement
     {
         private static DataListSingleton instance;
         public List<Blank> Blanks { get; set; }
+        public List<Sklad> Sklads { get; set; }
+        public List<SkladBlank> SkladBlanks { get; set; }
         public List<Order> Orders { get; set; }
         public List<Product> Products { get; set; }
         public List<ProductBlank> ProductBlanks { get; set; }
@@ -16,6 +18,8 @@ namespace LawFirmListImplement
         private DataListSingleton()
         {
             Blanks = new List<Blank>();
+            Sklads = new List<Sklad>();
+            SkladBlanks = new List<SkladBlank>();
             Orders = new List<Order>();
             Products = new List<Product>();
             ProductBlanks = new List<ProductBlank>();

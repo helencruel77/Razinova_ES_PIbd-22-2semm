@@ -1,5 +1,5 @@
-﻿using LawFirmLogic.BindingModels;
-using LawFirmLogic.BusinessLogics;
+﻿using LawFirmBusinessLogics.BindingModels;
+using LawFirmBusinessLogics.BusinessLogics;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -36,7 +36,7 @@ namespace LawFirm
                 {
                     try
                     {
-                        logic.SaveProductComponentsToPdfFile(new ReportBindingModel
+                        logic.SaveProductBlanksToPdfFile(new ReportBindingModel
                         {
                             FileName = dialog.FileName,
                         });

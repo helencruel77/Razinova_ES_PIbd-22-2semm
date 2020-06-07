@@ -1,9 +1,9 @@
-﻿using LawFirmLogic.Enums;
+﻿using LawFirmBusinessLogics.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LawFirmLogic.ViewModels
+namespace LawFirmBusinessLogics.ViewModels
 {
     public class ReportOrdersViewModel
     {

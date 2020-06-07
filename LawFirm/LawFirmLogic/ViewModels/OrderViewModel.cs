@@ -1,11 +1,11 @@
-﻿using LawFirmLogic.Enums;
+﻿using LawFirmBusinessLogics.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace LawFirmLogic.ViewModels
+namespace LawFirmBusinessLogics.ViewModels
 {
     [DataContract]
     public class OrderViewModel

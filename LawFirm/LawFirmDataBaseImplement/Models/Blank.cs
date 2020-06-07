@@ -15,5 +15,8 @@ namespace LawFirmDataBaseImplement.Models
 
         [ForeignKey("BlankId")]
         public virtual List<ProductBlank> ProductBlanks { get; set; }
+
+        [ForeignKey("BlankId")]
+        public virtual List<SkladBlank> SkladBlanks { get; set; }
     }
 }
