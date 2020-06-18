@@ -9,11 +9,6 @@ namespace LawFirmListImplement.Models
     public class Blank
     {
         public int Id { get; set; }
-
-        [Required]
         public string BlankName { get; set; }
-
-        [ForeignKey("BlankId")]
-        public virtual List<ProductBlank> ProductBlanks { get; set; }
     }
 }
