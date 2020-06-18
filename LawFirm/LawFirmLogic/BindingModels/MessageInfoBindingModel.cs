@@ -11,7 +11,7 @@ namespace LawFirmLogic.BindingModels
         [DataMember]
         public int? ClientId { get; set; }
         [DataMember]
-        public string Id { get; set; }
+        public string MessageId { get; set; }
         [DataMember]
         public string FromMailAddress { get; set; }
         [DataMember]
