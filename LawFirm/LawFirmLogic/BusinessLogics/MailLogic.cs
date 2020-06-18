@@ -95,7 +95,7 @@ namespace LawFirmLogic.BusinessLogics
                             info.Logic.Create(new MessageInfoBindingModel
                             {
                                 DateDelivery = message.Date.DateTime,
-                                Id = message.MessageId,
+                                MessageId = message.MessageId,
                                 FromMailAddress = mail.Address,
                                 Subject = message.Subject,
                                 Body = message.TextBody
