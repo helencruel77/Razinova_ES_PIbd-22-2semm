@@ -4,6 +4,7 @@ using LawFirmLogic.Interfaces;
 using LawFirmLogic.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LawFirmListImplement.Implements
@@ -19,31 +20,35 @@ namespace LawFirmListImplement.Implements
 
         public void CreateOrUpdate(ImplementerBindingModel model)
         {
-            Implementer tempImplementer = new Implementer { Id = 1 };
-
-            bool isImplementerExist = false;
-
-            foreach (var implementer in source.Implementers)
+            Implementer element = source.Implementers.FirstOrDefault(c => c.ImplementerFIO == model.ImplementerFIO && c.Id != model.Id);
+            if (element != null)
             {
-                if (implementer.Id >= tempImplementer.Id)
-                {
-                    tempImplementer.Id = implementer.Id + 1;
-                }
-                else if (implementer.Id == model.Id)
-                {
-                    tempImplementer = implementer;
-                    isImplementerExist = true;
-                    break;
-                }
+                throw new Exception("Уже есть исполнитель с таким именем");
             }
-
-            if (isImplementerExist)
+            if (model.Id.HasValue)
             {
-                CreateModel(model, tempImplementer);
+                element = source.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
+
+                if (element == null)
+                {
+                    throw new Exception("Элемент не найден");
+                }
+                else
+                {
+                    element.ImplementerFIO = model.ImplementerFIO;
+                    element.PauseTime = model.PauseTime;
+                    element.WorkingTime = model.WorkingTime;
+                }
             }
             else
             {
-                source.Implementers.Add(CreateModel(model, tempImplementer));
+                element = new Implementer
+                {
+                    ImplementerFIO = model.ImplementerFIO,
+                    PauseTime = model.PauseTime,
+                    WorkingTime = model.WorkingTime
+                };
+                source.Implementers.Add(element);
             }
         }
 
