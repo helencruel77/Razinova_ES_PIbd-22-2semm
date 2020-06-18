@@ -10,7 +10,7 @@ namespace LawFirmLogic.ViewModels
     public class MessageInfoViewModel
     {
         [DataMember]
-        public string Id { get; set; }
+        public string MessageId { get; set; }
         [DisplayName("Отправитель")]
         [DataMember]
         public string SenderName { get; set; }

@@ -23,7 +23,7 @@ namespace LawFirmListImplement.Implements
 
             foreach (var messageInfo in source.MessageInfoes)
             {
-                if (model.Id == messageInfo.Id)
+                if (model.MessageId == messageInfo.Id)
                 {
                     throw new Exception("Уже есть письмо с таким идентификатором");
                 }
@@ -60,14 +60,14 @@ namespace LawFirmListImplement.Implements
 
             foreach (var client in source.Clients)
             {
-                if (model.ClientId.HasValue && model.ClientId == client.Id)
+                if (client.Email == model.FromMailAddress)
                 {
                     clientId = model.ClientId;
                     break;
                 }
             }
 
-            MessageInfo.Id = model.Id;
+            MessageInfo.Id = model.MessageId;
             MessageInfo.ClientId = clientId;
             MessageInfo.SenderName = model.FromMailAddress;
             MessageInfo.DateDelivery = model.DateDelivery;
@@ -81,7 +81,7 @@ namespace LawFirmListImplement.Implements
         {
             return new MessageInfoViewModel
             {
-                Id = MessageInfo.Id,
+                MessageId = MessageInfo.Id,
                 SenderName = MessageInfo.SenderName,
                 DateDelivery = MessageInfo.DateDelivery,
                 Subject = MessageInfo.Subject,
