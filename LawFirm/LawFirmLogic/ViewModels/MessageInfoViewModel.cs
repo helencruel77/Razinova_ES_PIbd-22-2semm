@@ -13,6 +13,7 @@ namespace LawFirmLogic.ViewModels
     {
         [DataMember]
         public string MessageId { get; set; }
+        
         [Column(title: "Отправитель", width: 150)]
         [DataMember]
         public string SenderName { get; set; }
