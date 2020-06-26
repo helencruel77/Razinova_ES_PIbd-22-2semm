@@ -20,7 +20,7 @@ namespace LawFirmFileImplement.Implements
 
         public void Create(MessageInfoBindingModel model)
         {
-            MessageInfo element = source.MessageInfoes.FirstOrDefault(rec => rec.Id == model.Id);
+            MessageInfo element = source.MessageInfoes.FirstOrDefault(rec => rec.Id == model.MessageId);
 
             if (element != null)
             {
@@ -31,7 +31,7 @@ namespace LawFirmFileImplement.Implements
 
             source.MessageInfoes.Add(new MessageInfo
             {
-                Id = model.Id,
+                Id = model.MessageId,
                 ClientId = clientId,
                 SenderName = model.FromMailAddress,
                 DateDelivery = model.DateDelivery,
@@ -45,7 +45,7 @@ namespace LawFirmFileImplement.Implements
                 .Where(rec => model == null || rec.ClientId == model.ClientId)
                 .Select(rec => new MessageInfoViewModel
                 {
-                    Id = rec.Id,
+                    MessageId = rec.Id,
                     SenderName = rec.SenderName,
                     DateDelivery = rec.DateDelivery,
                     Subject = rec.Subject,

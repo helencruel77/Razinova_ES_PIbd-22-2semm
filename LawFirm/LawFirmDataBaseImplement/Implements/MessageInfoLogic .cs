@@ -16,7 +16,7 @@ namespace LawFirmDataBaseImplement.Implements
             using (var context = new LawFirmDatabase())
             {
                 MessageInfo element = context.MessageInfoes.FirstOrDefault(rec =>
-               rec.Id == model.Id);
+               rec.Id == model.MessageId);
                 if (element != null)
                 {
                     throw new Exception("Уже есть письмо с таким идентификатором");
@@ -25,7 +25,7 @@ namespace LawFirmDataBaseImplement.Implements
                model.FromMailAddress)?.Id;
                 context.MessageInfoes.Add(new MessageInfo
                 {
-                    Id = model.Id,
+                    Id = model.MessageId,
                     ClientId = clientId,
                     SenderName = model.FromMailAddress,
                     DateDelivery = model.DateDelivery,
@@ -43,7 +43,7 @@ namespace LawFirmDataBaseImplement.Implements
                 .Where(rec => model == null || rec.ClientId == model.ClientId)
                 .Select(rec => new MessageInfoViewModel
                 {
-                    Id = rec.Id,
+                    MessageId = rec.Id,
                     SenderName = rec.SenderName,
                     DateDelivery = rec.DateDelivery,
                     Subject = rec.Subject,

@@ -38,7 +38,7 @@
               <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>3.10854cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.5cm</Width>
@@ -57,7 +57,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Blank Name</Value>
+                              <Value>Бланк</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -87,7 +87,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Product Name</Value>
+                              <Value>Пакет документов</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -117,7 +117,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total Count</Value>
+                              <Value>Количество</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -231,7 +231,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -259,7 +258,7 @@
         <Top>2.08703cm</Top>
         <Left>4.75933cm</Left>
         <Height>1.2cm</Height>
-        <Width>7.5cm</Width>
+        <Width>8.10854cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
