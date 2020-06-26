@@ -11,17 +11,23 @@
     <Compile Remove="Migrations\20200605134626_Sklad.Designer.cs" />
     <Compile Remove="Migrations\20200607121625_InitialCreate.cs" />
     <Compile Remove="Migrations\20200607121625_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200607121652_InitialCreate.cs" />
+    <Compile Remove="Migrations\20200607121652_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200626162115_Other.cs" />
+    <Compile Remove="Migrations\20200626162115_Other.Designer.cs" />
+    <Compile Remove="Migrations\20200626162156_Client.cs" />
+    <Compile Remove="Migrations\20200626162156_Client.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="3.1.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
