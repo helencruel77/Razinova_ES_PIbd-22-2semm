@@ -53,7 +53,7 @@ namespace LawFirmView
             }
             if (comboBoxBlank.SelectedValue == null)
             {
-                MessageBox.Show("Выберите компонент", "Ошибка", MessageBoxButtons.OK,
+                MessageBox.Show("Выберите бланк", "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
                 return;
             }

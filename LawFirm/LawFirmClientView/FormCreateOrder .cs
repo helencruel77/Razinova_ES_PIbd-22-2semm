@@ -70,7 +70,7 @@ APIClient.GetRequest<ProductViewModel>($"api/main/getproduct?productId={id}");
             }
             if (comboBoxProduct.SelectedValue == null)
             {
-                MessageBox.Show("Выберите изделие", "Ошибка", MessageBoxButtons.OK,
+                MessageBox.Show("Выберите пакет документов", "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
                 return;
             }

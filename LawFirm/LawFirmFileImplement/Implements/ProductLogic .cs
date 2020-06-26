@@ -23,7 +23,7 @@ namespace LawFirmFileImplement.Implements
             {
                 if (product.ProductName == model.ProductName && product.Id != model.Id)
                 {
-                    throw new Exception("Уже есть изделие с таким названием");
+                    throw new Exception("Уже есть пакет документов с таким названием");
                 }
                 if (!model.Id.HasValue && product.Id >= temp.Id)
                 {

@@ -19,7 +19,7 @@ namespace LawFirmListImplement.Implements
 
         public void CreateOrUpdate(ClientBindingModel model)
         {
-            Client tempComponent = model.Id.HasValue ? null : new Client
+            Client tempBlank = model.Id.HasValue ? null : new Client
             {
                 Id = 1
             };
@@ -27,28 +27,28 @@ namespace LawFirmListImplement.Implements
             {
                 if (client.ClientFIO == model.ClientFIO && client.Id != model.Id)
                 {
-                    throw new Exception("Уже есть компонент с таким названием");
+                    throw new Exception("Уже есть бланк с таким названием");
                 }
-                if (!model.Id.HasValue && client.Id >= tempComponent.Id)
+                if (!model.Id.HasValue && client.Id >= tempBlank.Id)
                 {
-                    tempComponent.Id = client.Id + 1;
+                    tempBlank.Id = client.Id + 1;
                 }
                 else if (model.Id.HasValue && client.Id == model.Id)
                 {
-                    tempComponent = client;
+                    tempBlank = client;
                 }
             }
             if (model.Id.HasValue)
             {
-                if (tempComponent == null)
+                if (tempBlank == null)
                 {
                     throw new Exception("Элемент не найден");
                 }
-                CreateModel(model, tempComponent);
+                CreateModel(model, tempBlank);
             }
             else
             {
-                source.Clients.Add(CreateModel(model, tempComponent));
+                source.Clients.Add(CreateModel(model, tempBlank));
             }
         }
 
