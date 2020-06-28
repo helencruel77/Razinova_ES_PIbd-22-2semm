@@ -15,7 +15,11 @@ namespace LawFirmDataBaseImplement.Implements
         {
             using (var context = new LawFirmDatabase())
             {
-                Client client;
+                Client client = context.Clients.FirstOrDefault(rec => rec.Email == model.Email && rec.Id != model.Id);
+                if (client != null)
+                {
+                    throw new Exception("Уже есть клиент с такой почтой");
+                }
                 if (model.Id.HasValue)
                 {
                     client = context.Clients.FirstOrDefault(rec => rec.Id == model.Id);

@@ -27,7 +27,7 @@ namespace LawFirmListImplement.Implements
             {
                 if (client.ClientFIO == model.ClientFIO && client.Id != model.Id)
                 {
-                    throw new Exception("Уже есть бланк с таким названием");
+                    throw new Exception("Уже есть клиент с такой почтой");
                 }
                 if (!model.Id.HasValue && client.Id >= tempBlank.Id)
                 {
@@ -72,7 +72,15 @@ namespace LawFirmListImplement.Implements
             {
                 if (model != null)
                 {
-                    if (client.Id == model.Id)
+                    if (model.Id.HasValue)
+                    {
+                        if (client.Id == model.Id)
+                        {
+                            result.Add(CreateViewModel(client));
+                            break;
+                        }
+                    }
+                    else if (client.Email == model.Email && client.Password == model.Password)
                     {
                         result.Add(CreateViewModel(client));
                         break;
